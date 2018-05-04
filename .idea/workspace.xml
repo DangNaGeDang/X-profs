@@ -2,17 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="11300d85-b158-43c5-911b-8ae4ac14ef92" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/README.txt" afterPath="$PROJECT_DIR$/README.txt" />
-      <change beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
-      <change beforePath="$PROJECT_DIR$/node_modules/hbs/package.json" afterPath="$PROJECT_DIR$/node_modules/hbs/package.json" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" afterPath="$PROJECT_DIR$/package-lock.json" />
-      <change beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change beforePath="$PROJECT_DIR$/routes/authRoutes.js" afterPath="$PROJECT_DIR$/routes/authRoutes.js" />
-      <change beforePath="$PROJECT_DIR$/routes/dataRoutes.js" afterPath="$PROJECT_DIR$/routes/dataRoutes.js" />
-      <change beforePath="$PROJECT_DIR$/routes/index.js" afterPath="$PROJECT_DIR$/routes/index.js" />
       <change beforePath="$PROJECT_DIR$/views/data.hbs" afterPath="$PROJECT_DIR$/views/data.hbs" />
-      <change beforePath="$PROJECT_DIR$/views/layouts/layout.hbs" afterPath="$PROJECT_DIR$/views/layouts/layout.hbs" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -51,8 +42,8 @@
       <file leaf-file-name="data.hbs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/data.hbs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="15" column="26" lean-forward="true" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
+            <state relative-caret-position="109">
+              <caret line="44" column="12" lean-forward="false" selection-start-line="44" selection-start-column="12" selection-end-line="44" selection-end-column="12" />
               <folding>
                 <element signature="e#266#272#0#HTML" expanded="true" />
                 <element signature="e#543#549#0#HTML" expanded="true" />
@@ -70,11 +61,11 @@
                 <element signature="e#1532#1538#0#HTML" expanded="true" />
                 <element signature="e#1538#1544#0#HTML" expanded="true" />
                 <element signature="e#1617#1623#0#HTML" expanded="true" />
-                <element signature="e#1969#1975#0#HTML" expanded="true" />
-                <element signature="e#1975#1981#0#HTML" expanded="true" />
-                <element signature="e#2051#2057#0#HTML" expanded="true" />
-                <element signature="e#2248#2254#0#HTML" expanded="true" />
-                <element signature="e#2254#2260#0#HTML" expanded="true" />
+                <element signature="e#1999#2005#0#HTML" expanded="true" />
+                <element signature="e#2005#2011#0#HTML" expanded="true" />
+                <element signature="e#2081#2087#0#HTML" expanded="true" />
+                <element signature="e#2278#2284#0#HTML" expanded="true" />
+                <element signature="e#2284#2290#0#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -333,12 +324,12 @@
       <workItem from="1525068625064" duration="2127000" />
       <workItem from="1525357655797" duration="24677000" />
       <workItem from="1525436333986" duration="10237000" />
-      <workItem from="1525468612221" duration="4305000" />
+      <workItem from="1525468612221" duration="5098000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="123165000" />
+    <option name="totallyTimeSpent" value="123958000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="248" y="97" width="1396" height="811" extended-state="0" />
@@ -347,10 +338,10 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18327273" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32762557" sideWeight="0.5287599" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33798882" sideWeight="0.51781815" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33798882" sideWeight="0.49815303" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33798882" sideWeight="0.48218182" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24960423" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29329005" sideWeight="0.4712401" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -745,8 +736,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/data.hbs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="15" column="26" lean-forward="true" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
+        <state relative-caret-position="109">
+          <caret line="44" column="12" lean-forward="false" selection-start-line="44" selection-start-column="12" selection-end-line="44" selection-end-column="12" />
           <folding>
             <element signature="e#266#272#0#HTML" expanded="true" />
             <element signature="e#543#549#0#HTML" expanded="true" />
@@ -764,11 +755,11 @@
             <element signature="e#1532#1538#0#HTML" expanded="true" />
             <element signature="e#1538#1544#0#HTML" expanded="true" />
             <element signature="e#1617#1623#0#HTML" expanded="true" />
-            <element signature="e#1969#1975#0#HTML" expanded="true" />
-            <element signature="e#1975#1981#0#HTML" expanded="true" />
-            <element signature="e#2051#2057#0#HTML" expanded="true" />
-            <element signature="e#2248#2254#0#HTML" expanded="true" />
-            <element signature="e#2254#2260#0#HTML" expanded="true" />
+            <element signature="e#1999#2005#0#HTML" expanded="true" />
+            <element signature="e#2005#2011#0#HTML" expanded="true" />
+            <element signature="e#2081#2087#0#HTML" expanded="true" />
+            <element signature="e#2278#2284#0#HTML" expanded="true" />
+            <element signature="e#2284#2290#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>

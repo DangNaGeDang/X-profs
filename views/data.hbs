@@ -42,7 +42,7 @@
     <div class="form-group">
         <label for="sortBy">Sort by</label>&nbsp;
         <select class="form-control" id="sortBy" name="sortBy">
-            <option value="student">student</option>
+            {{#eq roles "teacher"}}<option value="student">student</option>{{/eq}}
             <option value="skill">skill</option>
             <option value="session">session</option>
             <option value="course">course</option>
