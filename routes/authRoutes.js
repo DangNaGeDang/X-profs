@@ -19,7 +19,7 @@ router.post('/auth.post', function(req,res){
         }
         if(user){
             req.session.user = user;
-            res.redirect('evaluation.html');
+            res.redirect('/data');
         }
         else{
             res.render('auth', {msg: 'Incorrect login or password'});

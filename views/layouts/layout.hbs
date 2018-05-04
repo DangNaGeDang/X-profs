@@ -28,19 +28,19 @@
   {{#if roles}}
 
       <div class="row">
-      <nav class="navbar navbar-light bg-faded col-md-2">
-          <a class="navbar-brand" href="#">{{roles}}: {{firstname}} {{name}}</a>
+      <nav class="navbar navbar-light bg-faded col-md-3">
+          <a class="navbar-brand" href="#">Dear {{roles}}: {{firstname}} {{name}}</a>
           <ul class="nav navbar-nav">
               <li class="nav-item active">
-                  <a class="nav-link" href="/data">Scores<span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="/data">Scores</a>
               </li>
           {{#eq roles "teacher"}}
               <li class="nav-item">
-                  <a class="nav-link" href="#">Evaluation</a>
+                  <a class="nav-link" href="/evaluation.html">Evaluation</a>
               </li>
 
               <li class="nav-item">
-                  <a class="nav-link" href="#">Database</a>
+                  <a class="nav-link" href="#">Database CRUD</a>
               </li>
           {{/eq}}
               <li class="nav-item">
@@ -55,7 +55,7 @@
 
   {{/if}}
 
-  <div class="col-md-10">
+  <div class="col-md-9">
     {{{body}}}
   </div>
   </div>

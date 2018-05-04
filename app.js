@@ -8,7 +8,7 @@ var logger = require('morgan');
 var helpers = require('handlebars-helpers')();
 var expresshbs = require('express-handlebars');
 
-var hbs = require('hbs');
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var authRouter = require('./routes/authRoutes');
@@ -48,6 +48,11 @@ app.use('/', authRouter);
 app.use('/', evalRouter);
 app.use('/', dataRouter);
 
+// var paginateHelper = require('express-handlebars-paginate');
+// var hbs = require('hbs');
+// hbs.handlebars.registerHelper('paginateHelper', paginateHelper.createPagination);
+
+// hbs.registerHelper('paginateHelper', paginateHelper.createPagination);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

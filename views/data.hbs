@@ -3,4 +3,104 @@
     <title>Scores</title>
 </head>
 <body>
+<h2>Scores List</h2>
+<form class="form-inline" action="/data" method="get">
+    {{#eq roles "teacher"}}
+        <div class="form-group">
+            <label for="studentFilter">Student</label>&nbsp;
+            <select class="form-control" id="studentFilter" name="studentFilter">
+                {{#each students}}
+                    <option value="{{this._id}}">{{this.firstname}} {{this.name}}</option>
+                {{/each}}
+            </select>
+        </div>&nbsp;&nbsp;
+    {{/eq}}
+    <div class="form-group">
+        <label for="sessionFilter">Session</label>&nbsp;
+        <select class="form-control" id="sessionFilter" name="sessionFilter">
+            {{#each sessions}}
+                <option value="{{this._id}}">{{this.date}}</option>
+            {{/each}}
+        </select>
+    </div>&nbsp;&nbsp;
+    <div class="form-group">
+        <label for="skillFilter">Skill</label>&nbsp;
+        <select class="form-control" id="skillFilter" name="skillFilter">
+            {{#each skills}}
+                <option value="{{this._id}}">{{this.name}}</option>
+            {{/each}}
+        </select>
+    </div>&nbsp;&nbsp;
+    <div class="form-group">
+        <label for="courseFilter">Course</label>&nbsp;
+        <select class="form-control" id="courseFilter" name="courseFilter">
+            {{#each courses}}
+            <option value="{{this._id}}">{{this.name}}</option>
+            {{/each}}
+        </select>
+    </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <div class="form-group">
+        <label for="sortBy">Sort by</label>&nbsp;
+        <select class="form-control" id="sortBy" name="sortBy">
+            <option value="student">student</option>
+            <option value="skill">skill</option>
+            <option value="session">session</option>
+            <option value="course">course</option>
+            <option value="mark">mark</option>
+        </select>
+    </div>&nbsp;&nbsp;
+    <div class="form-group">
+        <label for="Order">Order</label>&nbsp;
+        <select class="form-control" id="Order" name="Order">
+            <option value="1">ascending</option>
+            <option value="-1">descending</option>
+        </select>
+    </div>&nbsp;&nbsp;
+    <button type="submit" class="btn btn-primary">Set filter</button>
+</form>
+{{#eq roles "teacher"}}
+<table class="table">
+    <tr>
+
+            <th>Student</th>
+
+        <th>Course</th>
+        <th>Skill</th>
+        <th>Session</th>
+        <th>Mark</th>
+
+    </tr>
+    {{#each evaluations}}
+        <tr>
+
+            <td>{{this.student.firstname}} {{this.student.name}}</td>
+            <td>{{this.course.name}}</td>
+            <td>{{this.skill.name}}</td>
+            <td>{{this.session.date}}</td>
+            <td>{{this.mark}}</td>
+
+        </tr>
+    {{/each}}
+</table>
+{{/eq}}
+{{#eq roles "student"}}
+    <table class="table">
+        <tr>
+            <th>Course</th>
+            <th>Skill</th>
+            <th>Session</th>
+            <th>Mark</th>
+
+        </tr>
+        {{#each evaluations}}
+            <tr>
+                <td>{{this.course.name}}</td>
+                <td>{{this.skill.name}}</td>
+                <td>{{this.session.date}}</td>
+                <td>{{this.mark}}</td>
+
+            </tr>
+        {{/each}}
+    </table>
+{{/eq}}
 </body>
