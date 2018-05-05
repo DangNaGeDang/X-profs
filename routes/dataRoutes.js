@@ -63,8 +63,23 @@ router.get('/data', function(req,res){
         req.session.allCourses=courses;
     });
 
+    var filters = { };
+    var sort={};
+    if(req.query.studentFilter) { filters.student = req.query.studentFilter };
+    if(req.query.sessionFilter) { filters.session = req.query.sessionFilter };
+    if(req.query.skillFilter) { filters.skill = req.query.skillFilter };
+    if(req.query.courseFilter) { filters.course = req.query.courseFilter };
+    if(req.query.sortBy&&req.query.Order) {
+        if(req.query.sortBy=='student'){sort.student=req.query.Order};
+        if(req.query.sortBy=='skill'){sort.skill=req.query.Order};
+        if(req.query.sortBy=='session'){sort.session=req.query.Order};
+        if(req.query.sortBy=='course'){sort.course=req.query.Order};
+        if(req.query.sortBy=='mark'){sort.mark=req.query.Order};
+    };
     if(req.session.user.roles[0]=="student"){
-        Evaluation.find({student:req.session.user._id})
+        filters.student=req.session.user._id;
+        console.log("filter=",filters);
+        Evaluation.find(filters)
             .populate({
                 path: 'course',
                 model: Course
@@ -77,7 +92,7 @@ router.get('/data', function(req,res){
                 path: 'skill',
                 model: Skill
             })
-            .limit(nbPerPage).exec(function (err,evaluations) {
+            .sort(sort).limit(nbPerPage).exec(function (err,evaluations) {
             res.render('data',{
                 roles:req.session.user.roles[0],
                 firstname: req.session.user.firstname,
@@ -91,8 +106,10 @@ router.get('/data', function(req,res){
         });
 
     }else{
+
         Course.find({teacher:req.session.user._id}).exec(function (err,courses) {
-            Evaluation.find({course:courses})
+            if(!req.query.courseFilter){ filters.course = courses};
+            Evaluation.find(filters)
                 .populate({
                     path: 'course',
                     model: Course
@@ -109,7 +126,7 @@ router.get('/data', function(req,res){
                     path: 'student',
                     model: User
                 })
-                .limit(nbPerPage).exec(function (err,evaluations) {
+                .sort(sort).limit(nbPerPage).exec(function (err,evaluations) {
                 res.render('data',{
                     roles:req.session.user.roles[0],
                     firstname: req.session.user.firstname,
