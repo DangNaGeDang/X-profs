@@ -1,0 +1,62 @@
+{
+	"_id" : ObjectId("5ae0aebd8ab041016c9e08e3"),
+	"name" : "Angular",
+	"sessions" : [
+		ObjectId("5aed7982df80fd40935b92cb"),
+		ObjectId("5aed7985df80fd40935b92cc"),
+		ObjectId("5aed7987df80fd40935b92cd")
+	],
+	"skills" : [
+		ObjectId("5ae0aebd8ab041016c9e08de"),
+		ObjectId("5ae0aebd8ab041016c9e08df"),
+		ObjectId("5ae0aebd8ab041016c9e08e0")
+	],
+	"students" : [
+		ObjectId("5ae0aebc8ab041016c9e08db"),
+		ObjectId("5ae0aebc8ab041016c9e08dc"),
+		ObjectId("5ae0aebc8ab041016c9e08dd")
+	],
+	"teacher" : ObjectId("5ae0aebc8ab041016c9e08da")
+},
+{
+	"_id" : ObjectId("5ae0aebd8ab041016c9e08e2"),
+	"name" : "PHP",
+	"sessions" : [
+		ObjectId("5aed797adf80fd40935b92ca"),
+		ObjectId("5aed7973df80fd40935b92c9"),
+		ObjectId("5aed796adf80fd40935b92c8")
+	],
+	"skills" : [
+		ObjectId("5ae0aebd8ab041016c9e08de"),
+		ObjectId("5ae0aebd8ab041016c9e08df"),
+		ObjectId("5ae0aebd8ab041016c9e08e0")
+	],
+	"students" : [
+		ObjectId("5ae0aebc8ab041016c9e08db"),
+		ObjectId("5ae0aebc8ab041016c9e08dc"),
+		ObjectId("5ae0aebc8ab041016c9e08dd")
+	],
+	"teacher" : ObjectId("5ae0aebc8ab041016c9e08da")
+},
+{
+	"_id" : ObjectId("5ae0aebd8ab041016c9e08e1"),
+	"name" : "JAVA",
+	"sessions" : [
+		ObjectId("5ae0aebd8ab041016c9e08e4"),
+		ObjectId("5ae0aebd8ab041016c9e08e5"),
+		ObjectId("5ae0aebd8ab041016c9e08e6"),
+		ObjectId("5ae0aebd8ab041016c9e08e7"),
+		ObjectId("5ae0aebd8ab041016c9e08e8")
+	],
+	"skills" : [
+		ObjectId("5ae0aebd8ab041016c9e08de"),
+		ObjectId("5ae0aebd8ab041016c9e08df"),
+		ObjectId("5ae0aebd8ab041016c9e08e0")
+	],
+	"students" : [
+		ObjectId("5ae0aebc8ab041016c9e08db"),
+		ObjectId("5ae0aebc8ab041016c9e08dc"),
+		ObjectId("5ae0aebc8ab041016c9e08dd")
+	],
+	"teacher" : ObjectId("5ae0aebc8ab041016c9e08da")
+},

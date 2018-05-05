@@ -1,0 +1,40 @@
+{
+	"_id" : ObjectId("5ae0aebc8ab041016c9e08db"),
+	"firstname" : "Will",
+	"login" : "w.smith",
+	"name" : "Smith",
+	"password" : "toto",
+	"roles" : [
+		"student"
+	]
+},
+{
+	"_id" : ObjectId("5ae0aebc8ab041016c9e08da"),
+	"firstname" : "Bruno",
+	"login" : "b.ilponse",
+	"name" : "Ilponse",
+	"password" : "toto",
+	"roles" : [
+		"teacher"
+	]
+},
+{
+	"_id" : ObjectId("5ae0aebc8ab041016c9e08dd"),
+	"firstname" : "Woo",
+	"login" : "j.woo",
+	"name" : "John",
+	"password" : "toto",
+	"roles" : [
+		"student"
+	]
+},
+{
+	"_id" : ObjectId("5ae0aebc8ab041016c9e08dc"),
+	"firstname" : "Bruni",
+	"login" : "c.bruni",
+	"name" : "Carla",
+	"password" : "toto",
+	"roles" : [
+		"student"
+	]
+},
