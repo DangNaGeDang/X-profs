@@ -68,17 +68,39 @@ router.get('/data', function(req,res){
 
     var filters = { };
     var sort={};
-    if(req.query.studentFilter) { filters.student = req.query.studentFilter };
-    if(req.query.sessionFilter) { filters.session = req.query.sessionFilter };
-    if(req.query.skillFilter) { filters.skill = req.query.skillFilter };
-    if(req.query.courseFilter) { filters.course = req.query.courseFilter };
+    // if(req.query.studentFilter) { filters.student = req.query.studentFilter };
+    // if(req.query.sessionFilter) { filters.session = req.query.sessionFilter };
+    // if(req.query.skillFilter) { filters.skill = req.query.skillFilter };
+    // if(req.query.courseFilter) { filters.course = req.query.courseFilter };
+    // if(req.query.sortBy&&req.query.Order) {
+    //     if(req.query.sortBy=='student'){sort.student=req.query.Order};
+    //     if(req.query.sortBy=='skill'){sort.skill=req.query.Order};
+    //     if(req.query.sortBy=='session'){sort.session=req.query.Order};
+    //     if(req.query.sortBy=='course'){sort.course=req.query.Order};
+    //     if(req.query.sortBy=='mark'){sort.mark=req.query.Order};
+    // };
+    if(req.query.Reset=="1"){req.session.studentFilter=null;req.session.sessionFilter=null;req.session.skillFilter=null;req.session.courseFilter=null;req.session.studentOrder=null;req.session.skillOrder=null;req.session.sessionOrder=null;req.session.courseOrder=null;req.session.markOrder=null;};
+    if(req.query.studentFilter) { req.session.studentFilter = req.query.studentFilter };
+    if(req.query.sessionFilter) { req.session.sessionFilter = req.query.sessionFilter };
+    if(req.query.skillFilter) { req.session.skillFilter = req.query.skillFilter };
+    if(req.query.courseFilter) { req.session.courseFilter = req.query.courseFilter };
     if(req.query.sortBy&&req.query.Order) {
-        if(req.query.sortBy=='student'){sort.student=req.query.Order};
-        if(req.query.sortBy=='skill'){sort.skill=req.query.Order};
-        if(req.query.sortBy=='session'){sort.session=req.query.Order};
-        if(req.query.sortBy=='course'){sort.course=req.query.Order};
-        if(req.query.sortBy=='mark'){sort.mark=req.query.Order};
+        if(req.query.sortBy=='student'){req.session.studentOrder=req.query.Order};
+        if(req.query.sortBy=='skill'){req.session.skillOrder=req.query.Order};
+        if(req.query.sortBy=='session'){req.session.sessionOrder=req.query.Order};
+        if(req.query.sortBy=='course'){req.session.courseOrder=req.query.Order};
+        if(req.query.sortBy=='mark'){req.session.markOrder=req.query.Order};
     };
+    if(req.session.studentFilter) { filters.student = req.session.studentFilter };
+    if(req.session.sessionFilter) { filters.session = req.session.sessionFilter };
+    if(req.session.skillFilter) { filters.skill = req.session.skillFilter};
+    if(req.session.courseFilter) { filters.course = req.session.courseFilter };
+    if(req.session.studentOrder){sort.student=req.session.studentOrder};
+    if(req.session.skillOrder){sort.skill=req.session.skillOrder};
+    if(req.session.sessionOrder){sort.session=req.session.sessionOrder};
+    if(req.session.courseOrder){sort.course=req.session.courseOrder};
+    if(req.session.markOrder){sort.mark=req.session.markOrder};
+
     if(req.session.user.roles[0]=="student"){
         filters.student=req.session.user._id;
         console.log("filter=",filters);
@@ -99,7 +121,6 @@ router.get('/data', function(req,res){
                 model: Skill
             })
             .sort(sort).limit(nbPerPage).skip(skipnb).exec(function (err,evaluations) {
-                console.log("length=",evaluations.length);
                 res.render('data',{
                     roles:req.session.user.roles[0],
                     firstname: req.session.user.firstname,
@@ -115,7 +136,7 @@ router.get('/data', function(req,res){
     }else{
 
         Course.find({teacher:req.session.user._id}).exec(function (err,courses) {
-            if(!req.query.courseFilter){ filters.course = courses};
+            if(!req.session.courseFilter){ filters.course = courses};
             Evaluation.find(filters).exec(function (err,evals) {
                 totalRows=evals.length;
             });
@@ -137,7 +158,6 @@ router.get('/data', function(req,res){
                     model: User
                 })
                 .sort(sort).limit(nbPerPage).skip(skipnb).exec(function (err,evaluations) {
-                    console.log("length=",evaluations.length);
                     res.render('data',{
                         roles:req.session.user.roles[0],
                         firstname: req.session.user.firstname,
