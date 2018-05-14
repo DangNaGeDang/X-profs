@@ -50,6 +50,9 @@ router.get('/data', function(req,res){
     }
 
     var nbPerPage = 30;
+    var page = parseInt((req.query.page || '1'));
+    var skipnb = nbPerPage * (page - 1);
+    var totalRows=3000;
     Skill.find().exec(function (err,skills) {
         req.session.allSkills=skills;
     });
@@ -79,6 +82,9 @@ router.get('/data', function(req,res){
     if(req.session.user.roles[0]=="student"){
         filters.student=req.session.user._id;
         console.log("filter=",filters);
+        Evaluation.find(filters).exec(function (err,evals) {
+            totalRows=evals.length;
+        });
         Evaluation.find(filters)
             .populate({
                 path: 'course',
@@ -92,16 +98,17 @@ router.get('/data', function(req,res){
                 path: 'skill',
                 model: Skill
             })
-            .sort(sort).limit(nbPerPage).exec(function (err,evaluations) {
-            res.render('data',{
-                roles:req.session.user.roles[0],
-                firstname: req.session.user.firstname,
-                name: req.session.user.name,
-                evaluations:evaluations,
-                courses:req.session.allCourses,
-                skills:req.session.allSkills,
-                sessions:req.session.allSessions
-                // pagination:{page:page,limit:nbPerPage,totalRows:30000}
+            .sort(sort).limit(nbPerPage).skip(skipnb).exec(function (err,evaluations) {
+                console.log("length=",evaluations.length);
+                res.render('data',{
+                    roles:req.session.user.roles[0],
+                    firstname: req.session.user.firstname,
+                    name: req.session.user.name,
+                    evaluations:evaluations,
+                    courses:req.session.allCourses,
+                    skills:req.session.allSkills,
+                    sessions:req.session.allSessions,
+                    pagination:{page:page,limit:nbPerPage,totalRows:totalRows}
             });
         });
 
@@ -109,6 +116,9 @@ router.get('/data', function(req,res){
 
         Course.find({teacher:req.session.user._id}).exec(function (err,courses) {
             if(!req.query.courseFilter){ filters.course = courses};
+            Evaluation.find(filters).exec(function (err,evals) {
+                totalRows=evals.length;
+            });
             Evaluation.find(filters)
                 .populate({
                     path: 'course',
@@ -126,17 +136,18 @@ router.get('/data', function(req,res){
                     path: 'student',
                     model: User
                 })
-                .sort(sort).limit(nbPerPage).exec(function (err,evaluations) {
-                res.render('data',{
-                    roles:req.session.user.roles[0],
-                    firstname: req.session.user.firstname,
-                    name: req.session.user.name,
-                    evaluations:evaluations,
-                    courses:req.session.allCourses,
-                    skills:req.session.allSkills,
-                    sessions:req.session.allSessions,
-                    students:req.session.allStudents
-                    // pagination:{page:page,limit:nbPerPage,totalRows:30000}
+                .sort(sort).limit(nbPerPage).skip(skipnb).exec(function (err,evaluations) {
+                    console.log("length=",evaluations.length);
+                    res.render('data',{
+                        roles:req.session.user.roles[0],
+                        firstname: req.session.user.firstname,
+                        name: req.session.user.name,
+                        evaluations:evaluations,
+                        courses:req.session.allCourses,
+                        skills:req.session.allSkills,
+                        sessions:req.session.allSessions,
+                        students:req.session.allStudents,
+                        pagination:{page:page,limit:nbPerPage,totalRows:totalRows}
                 });
 
             })

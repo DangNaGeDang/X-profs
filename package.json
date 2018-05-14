@@ -10,7 +10,6 @@
     "debug": "~2.6.9",
     "express": "~4.16.0",
     "express-handlebars": "^3.0.0",
-    "express-handlebars-paginate": "file:express-handlebars-paginate",
     "express-session": "^1.15.6",
     "handlebars-helpers": "^0.10.0",
     "http-errors": "~1.6.2",

@@ -57,13 +57,14 @@
     <div class="form-group">
         <label for="Order">Order</label>&nbsp;
         <select class="form-control" id="Order" name="Order">
-            <option></option>
+            <option value="-1"></option>
             <option value="1">ascending</option>
             <option value="-1">descending</option>
         </select>
     </div>&nbsp;&nbsp;
     <button type="submit" class="btn btn-primary">Set filter</button>
 </form>
+
 {{#eq roles "teacher"}}
 <table class="table">
     <tr>
@@ -109,4 +110,5 @@
         {{/each}}
     </table>
 {{/eq}}
+{{{paginateHelper pagination limit="10"}}}
 </body>
