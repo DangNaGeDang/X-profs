@@ -39,7 +39,7 @@
         <select class="form-control" id="courseFilter" name="courseFilter">
             <option></option>
             {{#each courses}}
-            <option value="{{this._id}}">{{this.name}}</option>
+                <option value="{{this._id}}">{{this.name}}</option>
             {{/each}}
         </select>
     </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -47,7 +47,8 @@
         <label for="sortBy">Sort by</label>&nbsp;
         <select class="form-control" id="sortBy" name="sortBy">
             <option></option>
-            {{#idInArray roles "teacher"}}<option value="student">student</option>{{/idInArray}}
+            {{#idInArray roles "teacher"}}
+                <option value="student">student</option>{{/idInArray}}
             <option value="skill">skill</option>
             <option value="session">session</option>
             <option value="course">course</option>
@@ -68,37 +69,42 @@
 <HR>
 <table class="table">
     <tr>
-    {{#if studentFilterObject}} <a href="#" class="btn btn-primary  disabled" role="button">{{studentFilterObject.firstname}} {{studentFilterObject.name}}</a>  &nbsp;{{/if}}
-    {{#if sessionFilterObject}} <a href="#" class="btn btn-primary  disabled" role="button">{{sessionFilterObject.date}}</a> &nbsp; {{/if}}
-    {{#if skillFilterObject}} <a href="#" class="btn btn-primary  disabled" role="button">{{skillFilterObject.name}}</a> &nbsp; {{/if}}
-    {{#if courseFilterObject}} <a href="#" class="btn btn-primary  disabled" role="button">{{courseFilterObject.name}}</a>  {{/if}}
+        {{#if studentFilterObject}}<a href="#" class="btn btn-primary  disabled"
+                                      role="button">{{studentFilterObject.firstname}} {{studentFilterObject.name}}</a>
+            &nbsp;{{/if}}
+        {{#if sessionFilterObject}}
+            <a href="#" class="btn btn-primary  disabled" role="button">{{sessionFilterObject.date}}</a> &nbsp; {{/if}}
+        {{#if skillFilterObject}}
+            <a href="#" class="btn btn-primary  disabled" role="button">{{skillFilterObject.name}}</a> &nbsp; {{/if}}
+        {{#if courseFilterObject}}
+            <a href="#" class="btn btn-primary  disabled" role="button">{{courseFilterObject.name}}</a>  {{/if}}
     </tr>
 </table>
 
 {{#idInArray roles "teacher"}}
-<table class="table">
-    <tr>
+    <table class="table">
+        <tr>
 
             <th>Student</th>
 
-        <th>Course</th>
-        <th>Skill</th>
-        <th>Session</th>
-        <th>Mark</th>
-
-    </tr>
-    {{#each evaluations}}
-        <tr>
-
-            <td>{{this.student.firstname}} {{this.student.name}}</td>
-            <td>{{this.course.name}}</td>
-            <td>{{this.skill.name}}</td>
-            <td>{{this.session.date}}</td>
-            <td>{{this.mark}}</td>
+            <th>Course</th>
+            <th>Skill</th>
+            <th>Session</th>
+            <th>Mark</th>
 
         </tr>
-    {{/each}}
-</table>
+        {{#each evaluations}}
+            <tr>
+
+                <td>{{this.student.firstname}} {{this.student.name}}</td>
+                <td>{{this.course.name}}</td>
+                <td>{{this.skill.name}}</td>
+                <td>{{this.session.date}}</td>
+                <td>{{this.mark}}</td>
+
+            </tr>
+        {{/each}}
+    </table>
 {{/idInArray}}
 {{#idInArray roles "student"}}
     <table class="table">
@@ -122,8 +128,14 @@
 {{/idInArray}}
 {{{paginateHelper pagination limit="10"}}}
 <form class="form-inline" action="/data.post" method="post">
-    <button type="submit" class="btn btn-primary btn-success" name="export_type" value="CSV"><i class="fa fa-download"></i> Export as CSV</button>
-    <button type="submit" class="btn btn-primary btn-success" name="export_type" value="JSON"><i class="fa fa-download"></i> Export as JSON</button>
-    <button type="submit" class="btn btn-primary btn-success" name="export_type" value="XML"><i class="fa fa-download"></i> Export as XML</button>
+    <button type="submit" class="btn btn-primary btn-success" name="export_type" value="CSV"><i
+            class="fa fa-download"></i> Export as CSV
+    </button>
+    <button type="submit" class="btn btn-primary btn-success" name="export_type" value="JSON"><i
+            class="fa fa-download"></i> Export as JSON
+    </button>
+    <button type="submit" class="btn btn-primary btn-success" name="export_type" value="XML"><i
+            class="fa fa-download"></i> Export as XML
+    </button>
 </form>
 </body>

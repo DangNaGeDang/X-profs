@@ -7,26 +7,26 @@
         <label>Role:</label><br/>
 
         {{#idInArray user.roles 'teacher' }}
-            <input type="checkbox" name='role' value='teacher' id=1 checked /> <label
+            <input type="checkbox" name='role' value='teacher' id=1 checked/> <label
                 for=1>Teacher</label><br/>
         {{else}}
-            <input type="checkbox" name='role' value='teacher' id=1 /> <label
+            <input type="checkbox" name='role' value='teacher' id=1/> <label
                 for=1>Teacher</label><br/>
         {{/idInArray}}
 
         {{#idInArray user.roles 'student' }}
-            <input type="checkbox" name='role' value='student' id=2 checked /> <label
+            <input type="checkbox" name='role' value='student' id=2 checked/> <label
                 for=2>Student</label><br/>
         {{else}}
-            <input type="checkbox" name='role' value='student' id=2 /> <label
+            <input type="checkbox" name='role' value='student' id=2/> <label
                 for=2>Student</label><br/>
         {{/idInArray}}
 
         {{#idInArray user.roles 'admin' }}
-            <input type="checkbox" name='role' value='admin' id=3 checked /> <label
+            <input type="checkbox" name='role' value='admin' id=3 checked/> <label
                 for=3>Admin</label><br/>
         {{else}}
-            <input type="checkbox" name='role' value='admin' id=3 /> <label
+            <input type="checkbox" name='role' value='admin' id=3/> <label
                 for=3>Admin</label><br/>
         {{/idInArray}}
 
@@ -39,7 +39,8 @@
 
     <div class="form-group">
         <label>First name:</label>
-        <input type="text" class="form-control" name="firstname" placeholder="Enter first name" value={{user.firstname}}>
+        <input type="text" class="form-control" name="firstname" placeholder="Enter first name"
+               value={{user.firstname}}>
     </div>
 
     <div class="form-group">

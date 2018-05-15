@@ -11,7 +11,7 @@
 
     <br/>
     <h3>Teacher :</h3>
-    <select name="teacher" >
+    <select name="teacher">
         {{#each Teachers}}
             {{#egal this.id ../course.teacher}}
                 <option value={{this._id}} selected='selected'>{{this.name}}</option>
@@ -55,7 +55,7 @@
     <h3>Skills :</h3>
     {{#each Skills}}
         {{#idInArray  ../course.skills this.id}}
-            <input type="checkbox" name=skills value={{this.id}} id={{this.id}} checked /> <label
+            <input type="checkbox" name=skills value={{this.id}} id={{this.id}} checked/> <label
                 for={{this.id}}>{{this.name}}</label><br/>
         {{else}}
             <input type="checkbox" name=skills value={{this.id}} id={{this.id}}  /> <label

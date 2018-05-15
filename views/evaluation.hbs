@@ -4,78 +4,91 @@
 </head>
 
 
-
 <body>
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-        <h2 class="text-center">Courses</h2>
-        <form action="" method="get">
-            {{#each courses}}
-                <button {{#compare ../courseId "==" this._id}} style="background-color: dodgerblue; color: white; cursor: pointer;" {{/compare}} type="submit" name="course_id" value={{this._id}}>{{this.name}}</button><br>
-            {{/each}}
-        </form>
-    </div>
+            <h2 class="text-center">Courses</h2>
+            <form action="" method="get">
+                {{#each courses}}
+                    <button {{#compare ../courseId "==" this._id}}
+                    style="background-color: dodgerblue; color: white; cursor: pointer;" {{/compare}} type="submit"
+                    name="course_id" value={{this._id}}>{{this.name}}</button>
+                    <br>
+                {{/each}}
+            </form>
+        </div>
 
-{{#if sessions}}
-    <div class="col-md-6">
-        <h2 class="text-center">Sessions</h2>
-        <form action="" method="get">
-            <input type="hidden" name="course_id" value={{courseId}}>
-            {{#each sessions}}
-                <!--<button class="session btn-block" type="submit" name="session_id" value={{this._id}}>{{this.date}}</button><br>-->
-                <button style="width:100%; {{#compare ../sessionId "==" this._id}}background-color: dodgerblue; color: white; cursor: pointer;{{/compare}}" type="submit" name="session_id" value={{this._id}}>{{this.date}}</button><br>
-            {{/each}}
-        </form>
-    </div>
-{{/if}}
+        {{#if sessions}}
+            <div class="col-md-6">
+                <h2 class="text-center">Sessions</h2>
+                <form action="" method="get">
+                    <input type="hidden" name="course_id" value={{courseId}}>
+                    {{#each sessions}}
+                        <!--<button class="session btn-block" type="submit" name="session_id" value={{this._id}}>{{this.date}}</button><br>-->
+                        <button style="width:100%; {{#compare ../sessionId "=="
+                                                              this._id}}background-color: dodgerblue; color: white; cursor: pointer;{{/compare}}"
+                                type="submit" name="session_id" value={{this._id}}>{{this.date}}</button>
+                        <br>
+                    {{/each}}
+                </form>
+            </div>
+        {{/if}}
 
-{{#if students}}
-    <div class="col-md-3">
-        <h2 class="text-center">Students</h2>
-        <form action="" method="get">
-            <input type="hidden" name="course_id" value={{courseId}}>
-            <input type="hidden" name="session_id" value={{sessionId}}>
-            {{#each students}}
-                <button {{#compare ../studentId "==" this._id}} style="background-color: dodgerblue; color: white; cursor: pointer;" {{/compare}} type="submit" name="student_id" value={{this._id}}>{{this.firstname}} {{this.name}}</button><br>
-            {{/each}}
-        </form>
-    </div>
-{{/if}}
+        {{#if students}}
+            <div class="col-md-3">
+                <h2 class="text-center">Students</h2>
+                <form action="" method="get">
+                    <input type="hidden" name="course_id" value={{courseId}}>
+                    <input type="hidden" name="session_id" value={{sessionId}}>
+                    {{#each students}}
+                        <button {{#compare ../studentId "==" this._id}}
+                        style="background-color: dodgerblue; color: white; cursor: pointer;" {{/compare}} type="submit"
+                        name="student_id" value={{this._id}}>{{this.firstname}} {{this.name}}</button>
+                        <br>
+                    {{/each}}
+                </form>
+            </div>
+        {{/if}}
     </div>
     <HR>
-{{#if evaluations}}
-    <form class="container eval" action="/evaluation.post" method="post">
-        <h2>Evaluations</h2>
-        <table>
-            <col width="200">
-            <col width="150">
-            <col width="50">
-            <col width="50">
-            <col width="50">
-            <col width="50">
-            <tr>
-                <th class="lefttext">Skill</th>
-                <th class="lefttext">Not Evaluated</th>
-                <th>1</th>
-                <th>2</th>
-                <th>3</th>
-                <th>4</th>
-            </tr>
-            {{#each evaluations}}
+    {{#if evaluations}}
+        <form class="container eval" action="/evaluation.post" method="post">
+            <h2>Evaluations</h2>
+            <table>
+                <col width="200">
+                <col width="150">
+                <col width="50">
+                <col width="50">
+                <col width="50">
+                <col width="50">
                 <tr>
-                    <th class="lefttext">{{this.skill.name}}</th>
-                    <td><input type="radio" name="{{this.skill.name}}" value="-1" {{#compare this.mark "==" -1}} checked {{/compare}}></td>
-                    <td><input type="radio" name="{{this.skill.name}}" value="1" {{#compare this.mark "==" 1}} checked {{/compare}}></td>
-                    <td><input type="radio" name="{{this.skill.name}}" value="2" {{#compare this.mark "==" 2}} checked {{/compare}}></td>
-                    <td><input type="radio" name="{{this.skill.name}}" value="3" {{#compare this.mark "==" 3}} checked {{/compare}}></td>
-                    <td><input type="radio" name="{{this.skill.name}}" value="4" {{#compare this.mark "==" 4}} checked {{/compare}}></td>
+                    <th class="lefttext">Skill</th>
+                    <th class="lefttext">Not Evaluated</th>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
                 </tr>
-            {{/each}}
-        </table>
-        <br/>
-        <button type="submit" class="btn btn-primary">Save</button>
-    </form>
-{{/if}}
+                {{#each evaluations}}
+                    <tr>
+                        <th class="lefttext">{{this.skill.name}}</th>
+                        <td><input type="radio" name="{{this.skill.name}}" value="-1" {{#compare this.mark "==" -1}}
+                                   checked {{/compare}}></td>
+                        <td><input type="radio" name="{{this.skill.name}}" value="1" {{#compare this.mark "==" 1}}
+                                   checked {{/compare}}></td>
+                        <td><input type="radio" name="{{this.skill.name}}" value="2" {{#compare this.mark "==" 2}}
+                                   checked {{/compare}}></td>
+                        <td><input type="radio" name="{{this.skill.name}}" value="3" {{#compare this.mark "==" 3}}
+                                   checked {{/compare}}></td>
+                        <td><input type="radio" name="{{this.skill.name}}" value="4" {{#compare this.mark "==" 4}}
+                                   checked {{/compare}}></td>
+                    </tr>
+                {{/each}}
+            </table>
+            <br/>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    {{/if}}
 </div>
 </body>

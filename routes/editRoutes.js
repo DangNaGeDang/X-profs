@@ -14,8 +14,8 @@ var Handlebars = require("hbs");
 
 
 router.get('/course/:r_id', async function (req, res) {
-    if (req.session.user.roles.indexOf('admin') == -1){
-        return res.render('error', {message:"You are not admin"});
+    if (req.session.user.roles.indexOf('admin') == -1) {
+        return res.render('error', {message: "You are not admin"});
     }
     console.log(req.params.r_id)
 
@@ -39,10 +39,6 @@ router.get('/course/:r_id', async function (req, res) {
         .exec()
     ;
 
-    console.log(Teachers)
-    console.log(Sessions)
-    console.log(Students)
-    console.log(Skills)
 
 
     var filter = {_id: req.params.r_id};
@@ -51,14 +47,14 @@ router.get('/course/:r_id', async function (req, res) {
         if (err) {
             console.error('Not found', filter);
         }
-        console.log('cours : ')
-        console.log(course[0])
+        console.log('cours : ');
+        console.log(course[0]);
         res.render('edit_course', {
             course: course[0],
             Teachers: Teachers,
             Sessions: Sessions,
             Students: Students,
-            Skills: Skills, roles:req.session.user.roles[0],
+            Skills: Skills, roles: req.session.user.roles[0],
             firstname: req.session.user.firstname,
             name: req.session.user.name
         });
@@ -66,11 +62,11 @@ router.get('/course/:r_id', async function (req, res) {
 });
 
 router.post('/course.post/:r_id', function (req, res) {
-    if (req.session.user.roles.indexOf('admin') == -1){
-        return res.render('error', {message:"You are not admin"});
+    if (req.session.user.roles.indexOf('admin') == -1) {
+        return res.render('error', {message: "You are not admin"});
     }
-    console.log('COURSE POSTED')
-    console.log(req.params.r_id)
+    console.log('COURSE POSTED');
+    console.log(req.params.r_id);
     var filter = {_id: req.params.r_id};
     Course.findByIdAndUpdate(
         req.params.r_id,
@@ -83,8 +79,8 @@ router.post('/course.post/:r_id', function (req, res) {
 });
 
 router.get('/user/:r_id', async function (req, res) {
-    if (req.session.user.roles.indexOf('admin') == -1){
-        return res.render('error', {message:"You are not admin"});
+    if (req.session.user.roles.indexOf('admin') == -1) {
+        return res.render('error', {message: "You are not admin"});
     }
     var filter = {_id: req.params.r_id};
 
@@ -92,10 +88,10 @@ router.get('/user/:r_id', async function (req, res) {
         if (err) {
             console.error('Not found', filter);
         }
-        console.log('user : ')
-        console.log(usr[0])
+        console.log('user : ');
+        console.log(usr[0]);
         res.render('edit_user', {
-            user: usr[0], roles:req.session.user.roles[0],
+            user: usr[0], roles: req.session.user.roles[0],
             firstname: req.session.user.firstname,
             name: req.session.user.name
         });
@@ -103,11 +99,11 @@ router.get('/user/:r_id', async function (req, res) {
 });
 
 router.post('/user.post/:r_id', function (req, res) {
-    if (req.session.user.roles.indexOf('admin') == -1){
-        return res.render('error', {message:"You are not admin"});
+    if (req.session.user.roles.indexOf('admin') == -1) {
+        return res.render('error', {message: "You are not admin"});
     }
-    console.log("Edit user")
-    console.log(req.body)
+    console.log("Edit user");
+    console.log(req.body);
     User.find({_id: req.params.r_id}).limit(1)
         .exec(function (err, usr) {
             if (err) {
@@ -150,7 +146,7 @@ router.post('/user.post/:r_id', function (req, res) {
                     } else {
                         res.render('edit_user', {
                             user: usr[0],
-                            Message: "Wrong password", roles:req.session.user.roles[0],
+                            Message: "Wrong password", roles: req.session.user.roles[0],
                             firstname: req.session.user.firstname,
                             name: req.session.user.name
                         });
@@ -160,7 +156,8 @@ router.post('/user.post/:r_id', function (req, res) {
                 } else {
                     res.render('edit_user', {
                         user: usr[0],
-                        Message: "The two instances of the new password are different", roles:req.session.user.roles[0],
+                        Message: "The two instances of the new password are different",
+                        roles: req.session.user.roles[0],
                         firstname: req.session.user.firstname,
                         name: req.session.user.name
                     });
@@ -171,20 +168,20 @@ router.post('/user.post/:r_id', function (req, res) {
 });
 
 router.get('/session/:r_id', async function (req, res) {
-    if (req.session.user.roles.indexOf('admin') == -1){
-        return res.render('error', {message:"You are not admin"});
+    if (req.session.user.roles.indexOf('admin') == -1) {
+        return res.render('error', {message: "You are not admin"});
     }
-    console.log(req.params.r_id)
+    console.log(req.params.r_id);
     var filter = {_id: req.params.r_id};
 
     Session.find(filter).limit(1).exec(function (err, session) {
         if (err) {
             console.error('Not found', filter);
         }
-        console.log('session : ')
-        console.log(session[0])
+        console.log('session : ');
+        console.log(session[0]);
         res.render('edit_session', {
-            session:session[0], roles:req.session.user.roles[0],
+            session: session[0], roles: req.session.user.roles[0],
             firstname: req.session.user.firstname,
             name: req.session.user.name
         });
@@ -193,11 +190,11 @@ router.get('/session/:r_id', async function (req, res) {
 
 
 router.post('/session.post/:r_id', function (req, res) {
-    if (req.session.user.roles.indexOf('admin') == -1){
-        return res.render('error', {message:"You are not admin"});
+    if (req.session.user.roles.indexOf('admin') == -1) {
+        return res.render('error', {message: "You are not admin"});
     }
-    console.log('SESSION POSTED')
-    console.log(req.params.r_id)
+    console.log('SESSION POSTED');
+    console.log(req.params.r_id);
     var filter = {_id: req.params.r_id};
     Session.findByIdAndUpdate(
         req.params.r_id,
@@ -210,8 +207,8 @@ router.post('/session.post/:r_id', function (req, res) {
 });
 
 router.get('/skill/:r_id', async function (req, res) {
-    if (req.session.user.roles.indexOf('admin') == -1){
-        return res.render('error', {message:"You are not admin"});
+    if (req.session.user.roles.indexOf('admin') == -1) {
+        return res.render('error', {message: "You are not admin"});
     }
     console.log(req.params.r_id)
     var filter = {_id: req.params.r_id};
@@ -220,10 +217,10 @@ router.get('/skill/:r_id', async function (req, res) {
         if (err) {
             console.error('Not found', filter);
         }
-        console.log('skill : ')
-        console.log(skill[0])
+        console.log('skill : ');
+        console.log(skill[0]);
         res.render('edit_skill', {
-            skill:skill[0], roles:req.session.user.roles[0],
+            skill: skill[0], roles: req.session.user.roles[0],
             firstname: req.session.user.firstname,
             name: req.session.user.name
         });
@@ -232,11 +229,11 @@ router.get('/skill/:r_id', async function (req, res) {
 
 
 router.post('/skill.post/:r_id', function (req, res) {
-    if (req.session.user.roles.indexOf('admin') == -1){
-        return res.render('error', {message:"You are not admin"});
+    if (req.session.user.roles.indexOf('admin') == -1) {
+        return res.render('error', {message: "You are not admin"});
     }
-    console.log('SKILL POSTED')
-    console.log(req.params.r_id)
+    console.log('SKILL POSTED');
+    console.log(req.params.r_id);
     var filter = {_id: req.params.r_id};
     Skill.findByIdAndUpdate(
         req.params.r_id,

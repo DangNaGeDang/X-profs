@@ -12,46 +12,54 @@ var Skill = require('../models/skillModel');
 var Evaluation = require('../models/evalModel');
 
 
-router.get('/course/:r_id', function(req, res) {
-    if (req.session.user.roles.indexOf('admin') == -1){
-        return res.render('error', {message:"You are not admin"});
+router.get('/course/:r_id', function (req, res) {
+    if (req.session.user.roles.indexOf('admin') == -1) {
+        return res.render('error', {message: "You are not admin"});
     }
-    var filter = { _id: req.params.r_id };
-    Course.remove(filter, function(err) {
-        if(err) { console.error('Not found', filter); }
+    var filter = {_id: req.params.r_id};
+    Course.remove(filter, function (err) {
+        if (err) {
+            console.error('Not found', filter);
+        }
         res.redirect('/CRUD/course');
     });
 });
 
-router.get('/session/:r_id', function(req, res) {
-    if (req.session.user.roles.indexOf('admin') == -1){
-        return res.render('error', {message:"You are not admin"});
+router.get('/session/:r_id', function (req, res) {
+    if (req.session.user.roles.indexOf('admin') == -1) {
+        return res.render('error', {message: "You are not admin"});
     }
-    var filter = { _id: req.params.r_id };
-    Session.remove(filter, function(err) {
-        if(err) { console.error('Not found', filter); }
+    var filter = {_id: req.params.r_id};
+    Session.remove(filter, function (err) {
+        if (err) {
+            console.error('Not found', filter);
+        }
         res.redirect('/CRUD/session');
     });
 });
 
-router.get('/skill/:r_id', function(req, res) {
-    if (req.session.user.roles.indexOf('admin') == -1){
-        return res.render('error', {message:"You are not admin"});
+router.get('/skill/:r_id', function (req, res) {
+    if (req.session.user.roles.indexOf('admin') == -1) {
+        return res.render('error', {message: "You are not admin"});
     }
-    var filter = { _id: req.params.r_id };
-    Skill.remove(filter, function(err) {
-        if(err) { console.error('Not found', filter); }
+    var filter = {_id: req.params.r_id};
+    Skill.remove(filter, function (err) {
+        if (err) {
+            console.error('Not found', filter);
+        }
         res.redirect('/CRUD/skill');
     });
 });
 
-router.get('/user/:r_id', function(req, res) {
-    if (req.session.user.roles.indexOf('admin') == -1){
-        return res.render('error', {message:"You are not admin"});
+router.get('/user/:r_id', function (req, res) {
+    if (req.session.user.roles.indexOf('admin') == -1) {
+        return res.render('error', {message: "You are not admin"});
     }
-    var filter = { _id: req.params.r_id };
-    User.remove(filter, function(err) {
-        if(err) { console.error('Not found', filter); }
+    var filter = {_id: req.params.r_id};
+    User.remove(filter, function (err) {
+        if (err) {
+            console.error('Not found', filter);
+        }
         res.redirect('/CRUD/user');
     });
 });
