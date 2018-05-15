@@ -8,120 +8,117 @@
 <h2>Charts</h2>
 
 {{#if user}}
-    <form class="form-inline" action="/charts.html" method="get">
-        <div class="form-group">
-            <label for="chartFilter">Type de graphes</label>&nbsp;
-            <select class="form-control" id="chartFilter" name="chartFilter">
-                <option></option>
-                <option value="radar">radar</option>
-                <option value="moyenne">moyenne</option>
-            </select>
-        </div>&nbsp;&nbsp;
-        <button type="submit" class="btn btn-primary">chose</button>
-    </form>
+<form class="form-inline" action="/charts.html" method="get">
+    <div class="form-group">
+        <label for="chartFilter">Type de graphes</label>&nbsp;
+        <select class="form-control" id="chartFilter" name="chartFilter">
+            <option></option>
+            <option value="radar">radar</option>
+            <option value="moyenne">moyenne</option>
+        </select>
+    </div>&nbsp;&nbsp;
+    <button type="submit" class="btn btn-primary">chose</button>
+</form>
 {{/if}}
 
 
 {{#eq chartFilter 'radar'}}
 
-    <h5>{{chartFilter}} {{#if realCourse}}Graph of {{realCourse.name}} course {{/if}}</h5>
+    <h5>{{chartFilter}} {{#if realCourse}}Graph  of {{realCourse.name}} course {{/if}}</h5>
     <form class="form-inline" action="/charts.html" method="get">
         {{#idInArray roles "teacher"}}
-            <div class="form-group">
-                <label for="studentFilter">Student</label>&nbsp;
-                <select class="form-control" id="studentFilter" name="studentFilter">
-                    <option></option>
-                    {{#each students}}
-                        <option value="{{this._id}}">{{this.firstname}} {{this.name}}</option>
-                    {{/each}}
-                </select>
-            </div>&nbsp;&nbsp;
-        {{/idInArray}}
-
         <div class="form-group">
-            <label for="sessionFilter">Session</label>&nbsp;
-            <select class="form-control" id="sessionFilter" name="sessionFilter">
+            <label for="studentFilter">Student</label>&nbsp;
+            <select class="form-control" id="studentFilter" name="studentFilter">
                 <option></option>
-                {{#each sessions}}
-                    <option value="{{this._id}}">{{this.date}}</option>
+                {{#each students}}
+                    <option value="{{this._id}}">{{this.firstname}} {{this.name}}</option>
                 {{/each}}
             </select>
         </div>&nbsp;&nbsp;
+    {{/idInArray}}
+
+    <div class="form-group">
+        <label for="sessionFilter">Session</label>&nbsp;
+        <select class="form-control" id="sessionFilter" name="sessionFilter">
+            <option></option>
+            {{#each sessions}}
+                <option value="{{this._id}}">{{this.date}}</option>
+            {{/each}}
+        </select>
+    </div>&nbsp;&nbsp;
 
 
-        <div class="form-group">
-            <label for="courseFilter">Course</label>&nbsp;
-            <select class="form-control" id="courseFilter" name="courseFilter" required>
-                <option></option>
-                {{#each courses}}
-                    <option value="{{this._id}}">{{this.name}}</option>
-                {{/each}}
-            </select>
-        </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-        <input type="hidden" name="chartFilter" value={{chartFilter}}>
+    <div class="form-group">
+        <label for="courseFilter">Course</label>&nbsp;
+        <select class="form-control" id="courseFilter" name="courseFilter" required>
+            <option></option>
+            {{#each courses}}
+                <option value="{{this._id}}">{{this.name}}</option>
+            {{/each}}
+        </select>
+    </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-        <button type="submit" class="btn btn-primary">Set filter</button>
+    <input type="hidden" name="chartFilter" value={{chartFilter}}>
+
+    <button type="submit" class="btn btn-primary">Set filter</button>
     </form>
 
 
-    <HR>
-    {{# if notes}}
-        <table class="table">
-            <tr>
-                {{#if realCourse.name}}
-                    <a href="#" class="btn btn-danger  disabled" role="button">{{realCourse.name}} </a> &nbsp;{{/if}}
-                {{#if realSession.date}}
-                    <a href="#" class="btn btn-danger  disabled" role="button">{{realSession.date}}</a> &nbsp; {{/if}}
-                {{#if realStudent.firstname}}<a href="#" class="btn btn-danger  disabled"
-                                                role="button">{{realStudent.firstname}} {{realStudent.name}}</a>
-                    &nbsp; {{/if}}
-            </tr>
-        </table>
+<HR>
+{{# if notes}}
+    <table class="table">
+        <tr>
+            {{#if realCourse.name}} <a href="#" class="btn btn-danger  disabled" role="button">{{realCourse.name}} </a>  &nbsp;{{/if}}
+            {{#if realSession.date}} <a href="#" class="btn btn-danger  disabled" role="button">{{realSession.date}}</a> &nbsp; {{/if}}
+            {{#if realStudent.firstname}} <a href="#" class="btn btn-danger  disabled" role="button">{{realStudent.firstname}} {{realStudent.name}}</a> &nbsp; {{/if}}
+        </tr>
+    </table>
 
-        <input type="hidden" id="notes" name="notes" value={{notes}}/>
-        <input type="hidden" id="skillNames" name="skillNames" value={{skillNames}}/>
+<input type="hidden" id="notes" name="notes" value={{notes}} />
+<input type="hidden" id="skillNames" name="skillNames" value={{skillNames}} />
 
 
-        <canvas id="myChart" width="200" height="200"></canvas>
-        <script>
+<canvas id="myChart" width="200" height="200"></canvas>
+<script>
 
-            var ctx = document.getElementById("myChart");
+    var ctx = document.getElementById("myChart");
 
-            new Chart(ctx, {
-                type: 'radar',
-                data: {
-                    labels: skillNames.value.split(","),
-                    datasets: [
-                        {
-                            label: "Notes",
-                            fill: true,
-                            backgroundColor: "rgba(179,181,198,0.2)",
-                            borderColor: "rgba(179,181,198,1)",
-                            pointBorderColor: "#fff",
-                            pointBackgroundColor: "rgba(179,181,198,1)",
-                            data: notes.value.split(",").map(Number)
-                        }
-                    ]
-                },
-                options: {
-                    title: {
-                        display: true,
-                        text: 'Répartition suivant les compétances'
-                    },
-                    scale: {
-                        ticks: {
-                            beginAtZero: true,
-                            max: 4,
-                            min: 0
-                        }
-                    }
-
+    new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: skillNames.value.split(","),
+            datasets: [
+                {
+                    label: "Notes",
+                    fill: true,
+                    backgroundColor: "rgba(179,181,198,0.2)",
+                    borderColor: "rgba(179,181,198,1)",
+                    pointBorderColor: "#fff",
+                    pointBackgroundColor: "rgba(179,181,198,1)",
+                    data:  notes.value.split(",").map(Number)
                 }
-            });
+            ]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Répartition suivant les compétances'
+            },
+            scale: {
+                ticks: {
+                    beginAtZero: true,
+                    max: 4,
+                    min:0
+                }
+            }
 
-        </script>
-    {{/if}}
+        }
+    });
+
+</script>
+{{/if}}
 
 {{/eq}}
 
@@ -131,15 +128,15 @@
 
     <form class="form-inline" action="/charts.html" method="get">
 
-        <div class="form-group">
-            <label for="skillFilter">Skill</label>&nbsp;
-            <select class="form-control" id="skillFilter" name="skillFilter">
-                <option></option>
-                {{#each skills}}
-                    <option value="{{this._id}}">{{this.firstname}} {{this.name}}</option>
-                {{/each}}
-            </select>
-        </div>&nbsp;&nbsp;
+            <div class="form-group">
+                <label for="skillFilter">Skill</label>&nbsp;
+                <select class="form-control" id="skillFilter" name="skillFilter">
+                    <option></option>
+                    {{#each skills}}
+                        <option value="{{this._id}}">{{this.firstname}} {{this.name}}</option>
+                    {{/each}}
+                </select>
+            </div>&nbsp;&nbsp;
 
 
         <div class="form-group">
@@ -151,6 +148,7 @@
                 {{/each}}
             </select>
         </div>&nbsp;&nbsp;
+
 
 
         <div class="form-group">
@@ -168,20 +166,20 @@
         <button type="submit" class="btn btn-primary">Set filter</button>
     </form>
 
-
+    <HR>
 
     {{# if notes}}
 
-        <br>
-        Cours: {{realCourse.name}}
-        <br>
-        Session: {{realSession.date}}
-        <br>
-        Compétence: {{realSkill.name}} {{realSkill.description}}
-        <br>
+        <table class="table">
+            <tr>
+                {{#if realCourse.name}} <a href="#" class="btn btn-danger  disabled" role="button">{{realCourse.name}} </a>  &nbsp;{{/if}}
+                {{#if realSession.date}} <a href="#" class="btn btn-danger  disabled" role="button">{{realSession.date}}</a> &nbsp; {{/if}}
+                {{#if realStudent.firstname}} <a href="#" class="btn btn-danger  disabled" role="button">{{realStudent.firstname}} {{realStudent.name}}</a> &nbsp; {{/if}}
+            </tr>
+        </table>
 
-        <input type="hidden" id="notes" name="notes" value={{notes}}/>
-        <input type="hidden" id="students" name="students" value={{studentNames}}/>
+        <input type="hidden" id="notes" name="notes" value={{notes}} />
+        <input type="hidden" id="students" name="students" value={{studentNames}} />
 
         <canvas id="myChart" width="200" height="200"></canvas>
         <script>
@@ -195,13 +193,13 @@
                     datasets: [
                         {
                             label: "Notes moyenne",
-                            backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f"],
+                            backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f"],
                             data: notes.value.split(",").map(Number)
                         }
                     ]
                 },
                 options: {
-                    legend: {display: false},
+                    legend: { display: false },
                     title: {
                         display: true,
                         text: 'Moyenne'
