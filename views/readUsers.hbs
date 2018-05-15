@@ -1,0 +1,24 @@
+<h2>Users List</h2>
+
+<input type="button" class="btn btn-secondary" value="Add user" OnClick="window.location.href='/create/user' "/>
+
+<input type="button" class="btn btn-secondary" value="CRUD" OnClick="window.location.href='/CRUD' "/><HR>
+
+<table class="table">
+    <tr>
+        <th>Role</th>
+        <th>Name</th>
+        <th>First name</th>
+        <th>Login</th>
+    </tr>
+    {{#each List}}
+        <tr>
+            <td>{{this.roles}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.firstname}}</td>
+            <td>{{this.login}}</td>
+            <td><a href="/edit/user/{{this._id}}">Edit</a></td>
+            <td><a href="/remove/user/{{this._id}}">Remove</a></td>
+        </tr>
+    {{/each}}
+</table>

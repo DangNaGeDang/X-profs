@@ -1,0 +1,18 @@
+<h2>Skills List</h2>
+
+<input type="button" class="btn btn-secondary" value="Add skill" OnClick="window.location.href='/create/skill' "/>
+
+<input type="button" class="btn btn-secondary" value="CRUD" OnClick="window.location.href='/CRUD' "/><HR>
+
+<table class="table">
+    <tr>
+        <th>Name</th>
+    </tr>
+    {{#each List}}
+        <tr>
+            <td>{{this.name}}</td>
+            <td><a href="/edit/skill/{{this._id}}">Edit</a></td>
+            <td><a href="/remove/skill/{{this._id}}">Remove</a></td>
+        </tr>
+    {{/each}}
+</table>

@@ -1,0 +1,69 @@
+<h1>Edit user</h1>
+
+<input type="button" class="btn btn-default" value="CRUD" OnClick="window.location.href='/CRUD' "/>
+
+<form action="/edit/user.post/{{user.id}}" method="post">
+    <div class="form-group">
+        <label>Role:</label><br/>
+
+        {{#idInArray user.roles 'teacher' }}
+            <input type="checkbox" name='role' value='teacher' id=1 checked /> <label
+                for=1>Teacher</label><br/>
+        {{else}}
+            <input type="checkbox" name='role' value='teacher' id=1 /> <label
+                for=1>Teacher</label><br/>
+        {{/idInArray}}
+
+        {{#idInArray user.roles 'student' }}
+            <input type="checkbox" name='role' value='student' id=2 checked /> <label
+                for=2>Student</label><br/>
+        {{else}}
+            <input type="checkbox" name='role' value='student' id=2 /> <label
+                for=2>Student</label><br/>
+        {{/idInArray}}
+
+        {{#idInArray user.roles 'admin' }}
+            <input type="checkbox" name='role' value='admin' id=3 checked /> <label
+                for=3>Admin</label><br/>
+        {{else}}
+            <input type="checkbox" name='role' value='admin' id=3 /> <label
+                for=3>Admin</label><br/>
+        {{/idInArray}}
+
+    </div>
+
+    <div class="form-group">
+        <label>Name:</label>
+        <input type="text" class="form-control" name="name" placeholder="Enter name" value={{user.name}}>
+    </div>
+
+    <div class="form-group">
+        <label>First name:</label>
+        <input type="text" class="form-control" name="firstname" placeholder="Enter first name" value={{user.firstname}}>
+    </div>
+
+    <div class="form-group">
+        <label>Login:</label>
+        <input type="text" class="form-control" name="login" placeholder="Enter login" value={{user.login}}>
+    </div>
+
+    <h3>Password modification</h3>
+    <p style="color:red;">{{Message}}</p>
+    <div class="form-group">
+        <label>Current password:</label>
+        <input type="password" class="form-control" name="password" placeholder="Enter password">
+    </div>
+
+
+    <div class="form-group">
+        <label>New password:</label>
+        <input type="password" class="form-control" name="new" placeholder="New password">
+    </div>
+
+    <div class="form-group">
+        <label>Confirm new password:</label>
+        <input type="password" class="form-control" name="confirm" placeholder="Confirm password">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

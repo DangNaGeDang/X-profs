@@ -93,6 +93,7 @@ router.get('/evaluation.html', function(req,res){
                                             courses: courses,
                                             courseId: selectedCourse._id,
                                             sessionId: req.query.session_id,
+                                            studentId: req.query.student_id,
                                             sessions: selectedCourse.sessions,
                                             students: selectedCourse.students,
                                             evaluations: evals

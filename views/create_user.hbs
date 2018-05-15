@@ -1,0 +1,43 @@
+<h1>Add a user</h1>
+
+<input type="button" class="btn btn-default" value="CRUD" OnClick="window.location.href='/CRUD' "/>
+
+<form action="/create/user.post" method="post">
+    <div class="form-group">
+        <label>Role:</label><br/>
+        <input type="checkbox" name='role' value='teacher' id=1/> <label
+            for=1>Teacher</label><br/>
+        <input type="checkbox" name='role' value='student' id=2/> <label
+            for=2>Student</label><br/>
+        <input type="checkbox" name='role' value='admin' id=3/> <label
+            for=3>Admin</label><br/>
+
+    </div>
+
+    <div class="form-group">
+        <label>Name:</label>
+        <input type="text" class="form-control" name="name" placeholder="Enter name">
+    </div>
+
+    <div class="form-group">
+        <label>First name:</label>
+        <input type="text" class="form-control" name="firstname" placeholder="Enter first name">
+    </div>
+
+    <div class="form-group">
+        <label>Login:</label>
+        <input type="text" class="form-control" name="login" placeholder="Enter login">
+    </div>
+
+    <div class="form-group">
+        <label>Password:</label>
+        <input type="password" class="form-control" name="password" placeholder="Enter password">
+    </div>
+
+    <div class="form-group">
+        <label>Confirm password:</label>
+        <input type="password" class="form-control" name="confirm" placeholder="Confirm password">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

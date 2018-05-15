@@ -1,6 +1,8 @@
 var express = require('express');
 var session = require('express-session');
 var router = express.Router();
+var jsonexport = require('jsonexport');
+var xmlbuilder = require('xmlbuilder');
 
 var User = require('../models/userModel');
 var Course = require('../models/courseModel');
@@ -9,42 +11,8 @@ var Skill = require('../models/skillModel');
 var Evaluation = require('../models/evalModel');
 
 
-// router.get('/data', function(req,res){
-//     if(!req.session.user){
-//         res.redirect('auth');
-//     }
-//     var nbPerPage = 15;
-//     var page = parseInt((req.query.page || '1'));
-//     var skipnb = nbPerPage * (page - 1);
-//     if(req.session.user.roles[0]=="student"){
-//         Evaluation.find({student:req.session.user._id}).limit(nbPerPage).skip(skipnb).exec(function (err,evaluations) {
-//             res.render('data',{
-//                 roles:req.session.user.roles[0],
-//                 firstname: req.session.user.firstname,
-//                 name: req.session.user.name,
-//                 evaluations:evaluations,
-//                 pagination:{page:page,limit:nbPerPage,totalRows:30000}
-//             });
-//         });
-//
-//     }else{
-//         Course.find({teacher:req.session.user._id}).exec(function (err,courses) {
-//             Evaluation.find({course:courses}).limit(nbPerPage).skip(skipnb).exec(function (err,evaluations) {
-//                 res.render('data',{
-//                     roles:req.session.user.roles[0],
-//                     firstname: req.session.user.firstname,
-//                     name: req.session.user.name,
-//                     evaluations:evaluations,
-//                     pagination:{page:page,limit:nbPerPage,totalRows:30000}
-//                 });
-//
-//             })
-//         })
-//     }
-//
-// });
 
-router.get('/data', function(req,res){
+router.get('/data', async function(req,res){
     if(!req.session.user){
         res.redirect('auth');
     }
@@ -68,22 +36,34 @@ router.get('/data', function(req,res){
 
     var filters = { };
     var sort={};
-    // if(req.query.studentFilter) { filters.student = req.query.studentFilter };
-    // if(req.query.sessionFilter) { filters.session = req.query.sessionFilter };
-    // if(req.query.skillFilter) { filters.skill = req.query.skillFilter };
-    // if(req.query.courseFilter) { filters.course = req.query.courseFilter };
-    // if(req.query.sortBy&&req.query.Order) {
-    //     if(req.query.sortBy=='student'){sort.student=req.query.Order};
-    //     if(req.query.sortBy=='skill'){sort.skill=req.query.Order};
-    //     if(req.query.sortBy=='session'){sort.session=req.query.Order};
-    //     if(req.query.sortBy=='course'){sort.course=req.query.Order};
-    //     if(req.query.sortBy=='mark'){sort.mark=req.query.Order};
-    // };
-    if(req.query.Reset=="1"){req.session.studentFilter=null;req.session.sessionFilter=null;req.session.skillFilter=null;req.session.courseFilter=null;req.session.studentOrder=null;req.session.skillOrder=null;req.session.sessionOrder=null;req.session.courseOrder=null;req.session.markOrder=null;};
-    if(req.query.studentFilter) { req.session.studentFilter = req.query.studentFilter };
-    if(req.query.sessionFilter) { req.session.sessionFilter = req.query.sessionFilter };
-    if(req.query.skillFilter) { req.session.skillFilter = req.query.skillFilter };
-    if(req.query.courseFilter) { req.session.courseFilter = req.query.courseFilter };
+    if(req.query.Reset=="1"){
+        req.session.studentFilterObject=null;
+        req.session.sessionFilterObject=null;
+        req.session.skillFilterObject=null;
+        req.session.courseFilterObject=null;
+        req.session.studentOrder=null;
+        req.session.skillOrder=null;
+        req.session.sessionOrder=null;
+        req.session.courseOrder=null;
+        req.session.markOrder=null;
+    };
+    if(req.query.studentFilter) {
+        var student= await User.findOne({'_id':req.query.studentFilter}).exec();
+        req.session.studentFilterObject=student;
+
+    };
+    if(req.query.sessionFilter) {
+        var session=await Session.findOne({'_id':req.query.sessionFilter}).exec();
+        req.session.sessionFilterObject=session;
+    };
+    if(req.query.skillFilter) {
+        var skill=await Skill.findOne({'_id':req.query.skillFilter}).exec();
+        req.session.skillFilterObject=skill;
+    };
+    if(req.query.courseFilter) {
+        var course=await Course.findOne({'_id':req.query.courseFilter}).exec();
+        req.session.courseFilterObject=course;
+    };
     if(req.query.sortBy&&req.query.Order) {
         if(req.query.sortBy=='student'){req.session.studentOrder=req.query.Order};
         if(req.query.sortBy=='skill'){req.session.skillOrder=req.query.Order};
@@ -91,10 +71,10 @@ router.get('/data', function(req,res){
         if(req.query.sortBy=='course'){req.session.courseOrder=req.query.Order};
         if(req.query.sortBy=='mark'){req.session.markOrder=req.query.Order};
     };
-    if(req.session.studentFilter) { filters.student = req.session.studentFilter };
-    if(req.session.sessionFilter) { filters.session = req.session.sessionFilter };
-    if(req.session.skillFilter) { filters.skill = req.session.skillFilter};
-    if(req.session.courseFilter) { filters.course = req.session.courseFilter };
+    if(req.session.studentFilterObject) { filters.student = req.session.studentFilterObject._id;};
+    if(req.session.sessionFilterObject) { filters.session = req.session.sessionFilterObject._id };
+    if(req.session.skillFilterObject) { filters.skill = req.session.skillFilterObject._id};
+    if(req.session.courseFilterObject) { filters.course = req.session.courseFilterObject._id };
     if(req.session.studentOrder){sort.student=req.session.studentOrder};
     if(req.session.skillOrder){sort.skill=req.session.skillOrder};
     if(req.session.sessionOrder){sort.session=req.session.sessionOrder};
@@ -103,7 +83,6 @@ router.get('/data', function(req,res){
 
     if(req.session.user.roles[0]=="student"){
         filters.student=req.session.user._id;
-        console.log("filter=",filters);
         Evaluation.find(filters).exec(function (err,evals) {
             totalRows=evals.length;
         });
@@ -121,25 +100,29 @@ router.get('/data', function(req,res){
                 model: Skill
             })
             .sort(sort).limit(nbPerPage).skip(skipnb).exec(function (err,evaluations) {
+            req.session.filteredEvaluations = evaluations;
                 res.render('data',{
-                    roles:req.session.user.roles[0],
+                    roles:req.session.user.roles,
                     firstname: req.session.user.firstname,
                     name: req.session.user.name,
                     evaluations:evaluations,
                     courses:req.session.allCourses,
                     skills:req.session.allSkills,
                     sessions:req.session.allSessions,
-                    pagination:{page:page,limit:nbPerPage,totalRows:totalRows}
+                    pagination:{page:page,limit:nbPerPage,totalRows:totalRows},
+                    sessionFilterObject:req.session.sessionFilterObject,
+                    skillFilterObject:req.session.skillFilterObject,
+                    courseFilterObject:req.session.courseFilterObject,
             });
         });
 
     }else{
-
         Course.find({teacher:req.session.user._id}).exec(function (err,courses) {
-            if(!req.session.courseFilter){ filters.course = courses};
+            if(!req.session.courseFilterObject){ filters.course = courses};
             Evaluation.find(filters).exec(function (err,evals) {
                 totalRows=evals.length;
             });
+
             Evaluation.find(filters)
                 .populate({
                     path: 'course',
@@ -158,8 +141,10 @@ router.get('/data', function(req,res){
                     model: User
                 })
                 .sort(sort).limit(nbPerPage).skip(skipnb).exec(function (err,evaluations) {
+                req.session.filteredEvaluations = evaluations;
                     res.render('data',{
-                        roles:req.session.user.roles[0],
+
+                        roles:req.session.user.roles,
                         firstname: req.session.user.firstname,
                         name: req.session.user.name,
                         evaluations:evaluations,
@@ -167,7 +152,12 @@ router.get('/data', function(req,res){
                         skills:req.session.allSkills,
                         sessions:req.session.allSessions,
                         students:req.session.allStudents,
-                        pagination:{page:page,limit:nbPerPage,totalRows:totalRows}
+                        pagination:{page:page,limit:nbPerPage,totalRows:totalRows},
+                        //afiichage de choix
+                        studentFilterObject:req.session.studentFilterObject,
+                        sessionFilterObject:req.session.sessionFilterObject,
+                        skillFilterObject:req.session.skillFilterObject,
+                        courseFilterObject:req.session.courseFilterObject,
                 });
 
             })
@@ -175,4 +165,62 @@ router.get('/data', function(req,res){
     }
 
 });
+
+router.post('/data.post', function(req,res) {
+    if (!req.session.user) {
+        res.redirect('auth');
+    }
+    var dataToExport = [];
+    req.session.filteredEvaluations.forEach(function(eval){
+        var simplifiedEval = {};
+        if(req.session.user.roles[0]=='teacher'){
+            simplifiedEval = {
+                firstname:eval.student.firstname,
+                name:eval.student.name,
+                course:eval.course.name,
+                skill:eval.skill.name,
+                session:eval.session.date,
+                mark:eval.mark
+            };
+        }
+        else if(req.session.user.roles[0]=='student'){
+            simplifiedEval = {
+                course:eval.course.name,
+                skill:eval.skill.name,
+                session:eval.session.date,
+                mark:eval.mark
+            };
+        }
+        dataToExport.push(simplifiedEval);
+    });
+    switch(req.body.export_type){
+        case 'CSV':
+            jsonexport(dataToExport, function (err, csv) {
+                if (err) return console.log(err);
+                res.writeHead(200, {
+                    'Content-Type': 'text/csv',
+                    'Content-Disposition': 'attachment; filename=FilteredData.csv'
+                });
+                res.end(csv, "binary");
+            });
+            break;
+
+        case 'JSON':
+            res.writeHead(200, {
+                'Content-Type': 'application/json',
+                'Content-Disposition': 'attachment; filename=FilteredData.json'
+            });
+            res.end(JSON.stringify(dataToExport), "binary");
+            break;
+
+        case 'XML':
+            res.writeHead(200, {
+                'Content-Type': 'application/XML',
+                'Content-Disposition': 'attachment; filename=FilteredData.xml'
+            });
+            res.end(xmlbuilder.create(dataToExport).end({pretty: true}));
+    }
+
+});
+
 module.exports = router;

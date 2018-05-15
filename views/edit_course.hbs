@@ -1,0 +1,71 @@
+<h1>Edit a course</h1>
+
+<input type="button" class="btn btn-default" value="CRUD" OnClick="window.location.href='/CRUD' "/>
+
+<form action="/edit/course.post/{{course.id}}" method="post">
+    <div class="form-group">
+        <h3>Name:</h3>
+        <input type="text" class="form-control" name="name" value={{course.name}}>
+    </div>
+
+
+    <br/>
+    <h3>Teacher :</h3>
+    <select name="teacher" >
+        {{#each Teachers}}
+            {{#egal this.id ../course.teacher}}
+                <option value={{this._id}} selected='selected'>{{this.name}}</option>
+            {{else}}
+                <option value={{this.id}}>{{this.name}}</option>
+            {{/egal}}
+        {{/each}}
+    </select>
+    <br/>
+    <a href='/create/user'>New teacher</a><br/>
+
+    <br/>
+    <h3>Sessions :</h3>
+    {{#each Sessions}}
+        {{#idInArray ../course.sessions this._id }}
+            <input type="checkbox" name=sessions value={{this.id}} id={{this.id}} checked/> <label
+                for={{this.id}}>{{this.date}}</label><br/>
+        {{else}}
+            <input type="checkbox" name=sessions value={{this.id}} id={{this.id}} /> <label
+                for={{this.id}}>{{this.date}}</label><br/>
+        {{/idInArray}}
+
+    {{/each}}
+    <a href='/create/session'>New session</a><br/>
+
+    <br/>
+    <h3>Students :</h3>
+    {{#each Students}}
+        {{#idInArray  ../course.students this._id}}
+            <input type="checkbox" name=students value={{this.id}} id={{this.id}} checked/> <label
+                for={{this.id}}>{{this.name}}</label><br/>
+        {{else}}
+            <input type="checkbox" name=students value={{this.id}} id={{this.id}} /> <label
+                for={{this.id}}>{{this.name}}</label><br/>
+        {{/idInArray}}
+
+    {{/each}}
+    <a href='/create/user'>New student</a><br/>
+
+    <br/>
+    <h3>Skills :</h3>
+    {{#each Skills}}
+        {{#idInArray  ../course.skills this.id}}
+            <input type="checkbox" name=skills value={{this.id}} id={{this.id}} checked /> <label
+                for={{this.id}}>{{this.name}}</label><br/>
+        {{else}}
+            <input type="checkbox" name=skills value={{this.id}} id={{this.id}}  /> <label
+                for={{this.id}}>{{this.name}}</label><br/>
+        {{/idInArray}}
+    {{/each}}
+    <a href='/create/skill'>New skill</a><br/>
+    <br/>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+
+</form>
+

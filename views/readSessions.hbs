@@ -1,0 +1,18 @@
+<h2>Sessions List</h2>
+
+<input type="button" class="btn btn-secondary" value="Add session" OnClick="window.location.href='/create/session' "/>
+
+<input type="button" class="btn btn-secondary" value="CRUD" OnClick="window.location.href='/CRUD' "/><HR>
+
+<table class="table">
+    <tr>
+        <th>Date</th>
+    </tr>
+    {{#each List}}
+        <tr>
+            <td>{{this.date}}</td>
+            <td><a href="/edit/session/{{this._id}}">Edit</a></td>
+            <td><a href="/remove/session/{{this._id}}">Remove</a></td>
+        </tr>
+    {{/each}}
+</table>

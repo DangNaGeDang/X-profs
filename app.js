@@ -7,17 +7,39 @@ var logger = require('morgan');
 
 var helpers = require('handlebars-helpers')();
 var expresshbs = require('express-handlebars');
-
+var Handlebars = require('handlebars')
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var authRouter = require('./routes/authRoutes');
 var evalRouter = require('./routes/evaluationRoutes');
 var dataRouter=require('./routes/dataRoutes');
-
+var chartRouter=require('./routes/chartRoutes');
+var createRouter = require('../XProfGroupe/routes/createRoutes');
+var removeRouter = require('../XProfGroupe/routes/removeRoutes');
+var editRouter = require('../XProfGroupe/routes/editRoutes');
+var CRUDRouter = require('../XProfGroupe/routes/CRUDRoutes');
 var mongoose = require('mongoose');
 
 var app = express();
+Handlebars.registerHelper('idInArray', function(list, elt, options) {
+    var stringElt = elt.toString();
+    if(list.indexOf(stringElt) != -1) {
+        return options.fn(this);
+    } else {
+        return options.inverse(this);
+    }
+});
+
+Handlebars.registerHelper('egal', function(a, b, options) {
+    console.log ("eq :"+ a +' '+ b)
+    astr = a.toString()
+    bstr = b.toString()
+    if(astr == bstr) {
+        return options.fn(this);
+    } else {
+        return options.inverse(this);
+    }
+});
 
 mongoose.connect('mongodb://localhost/xprofs-groupe', function(err) {
     if (err) { throw err; }
@@ -31,8 +53,8 @@ var hbs = require('hbs');
 //hbs.registerHelper('paginateHelper', paginateHelper.createPagination);
 var helpers = require('handlebars-helpers')();
 helpers.paginateHelper = paginateHelper.createPagination;
-console.log("helpers=",helpers);
 app.engine('hbs', expresshbs({extname:'hbs',helpers:helpers,defaultLayout:'layout.hbs'}));
+
 
 app.use(logger('dev'));
 
@@ -49,16 +71,14 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/', authRouter);
 app.use('/', evalRouter);
 app.use('/', dataRouter);
-
-// var paginateHelper = require('express-handlebars-paginate');
-// var hbs = require('hbs');
-// hbs.handlebars.registerHelper('paginateHelper', paginateHelper.createPagination);
-
-// hbs.registerHelper('paginateHelper', paginateHelper.createPagination);
+app.use('/', chartRouter);
+app.use('/create', createRouter);
+app.use('/remove', removeRouter);
+app.use('/edit', editRouter);
+app.use('/CRUD', CRUDRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

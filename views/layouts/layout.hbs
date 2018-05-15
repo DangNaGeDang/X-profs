@@ -34,17 +34,20 @@
               <li class="nav-item active">
                   <a class="nav-link" href="/data">Scores</a>
               </li>
-          {{#eq roles "teacher"}}
-              <li class="nav-item">
-                  <a class="nav-link" href="/evaluation.html">Evaluation</a>
-              </li>
+              {{#idInArray roles "teacher"}}
+                  <li class="nav-item">
+                      <a class="nav-link" href="/evaluation.html">Evaluation</a>
+                  </li>
 
+              {{/idInArray}}
+
+              {{#idInArray roles "admin"}}
+                  <li class="nav-item">
+                      <a class="nav-link" href="/CRUD">Database CRUD</a>
+                  </li>
+              {{/idInArray}}
               <li class="nav-item">
-                  <a class="nav-link" href="#">Database CRUD</a>
-              </li>
-          {{/eq}}
-              <li class="nav-item">
-                  <a class="nav-link" href="#">Graphes</a>
+                  <a class="nav-link" href="/charts.html">Graphes</a>
               </li>
               <li class="nav-item">
                   <a class="nav-link" href="/signout">Logout</a>

@@ -14,9 +14,11 @@
     "handlebars-helpers": "^0.10.0",
     "hbs": "~4.0.1",
     "http-errors": "~1.6.2",
+    "jsonexport": "^2.1.0",
     "mongoose": "^5.0.16",
     "morgan": "~1.9.0",
-    "session-file-store": "^1.2.0"
+    "session-file-store": "^1.2.0",
+    "xmlbuilder": "^10.0.0"
   },
   "devDependencies": {
     "hbs": "^4.0.1"

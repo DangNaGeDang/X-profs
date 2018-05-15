@@ -5,7 +5,7 @@
 <body>
 <h2>Scores List</h2>
 <form class="form-inline" action="/data" method="get">
-    {{#eq roles "teacher"}}
+    {{#idInArray roles "teacher"}}
         <div class="form-group">
             <label for="studentFilter">Student</label>&nbsp;
             <select class="form-control" id="studentFilter" name="studentFilter">
@@ -15,7 +15,7 @@
                 {{/each}}
             </select>
         </div>&nbsp;&nbsp;
-    {{/eq}}
+    {{/idInArray}}
     <div class="form-group">
         <label for="sessionFilter">Session</label>&nbsp;
         <select class="form-control" id="sessionFilter" name="sessionFilter">
@@ -47,7 +47,7 @@
         <label for="sortBy">Sort by</label>&nbsp;
         <select class="form-control" id="sortBy" name="sortBy">
             <option></option>
-            {{#eq roles "teacher"}}<option value="student">student</option>{{/eq}}
+            {{#idInArray roles "teacher"}}<option value="student">student</option>{{/idInArray}}
             <option value="skill">skill</option>
             <option value="session">session</option>
             <option value="course">course</option>
@@ -65,8 +65,17 @@
     <button type="submit" class="btn btn-primary">Set filter</button>
     <button type="submit" class="btn btn-danger" id="Reset" name="Reset" value="1">Reset</button>
 </form>
+<HR>
+<table class="table">
+    <tr>
+    {{#if studentFilterObject}} <a href="#" class="btn btn-primary  disabled" role="button">{{studentFilterObject.firstname}} {{studentFilterObject.name}}</a>  &nbsp;{{/if}}
+    {{#if sessionFilterObject}} <a href="#" class="btn btn-primary  disabled" role="button">{{sessionFilterObject.date}}</a> &nbsp; {{/if}}
+    {{#if skillFilterObject}} <a href="#" class="btn btn-primary  disabled" role="button">{{skillFilterObject.name}}</a> &nbsp; {{/if}}
+    {{#if courseFilterObject}} <a href="#" class="btn btn-primary  disabled" role="button">{{courseFilterObject.name}}</a>  {{/if}}
+    </tr>
+</table>
 
-{{#eq roles "teacher"}}
+{{#idInArray roles "teacher"}}
 <table class="table">
     <tr>
 
@@ -90,8 +99,8 @@
         </tr>
     {{/each}}
 </table>
-{{/eq}}
-{{#eq roles "student"}}
+{{/idInArray}}
+{{#idInArray roles "student"}}
     <table class="table">
         <tr>
             <th>Course</th>
@@ -110,6 +119,11 @@
             </tr>
         {{/each}}
     </table>
-{{/eq}}
+{{/idInArray}}
 {{{paginateHelper pagination limit="10"}}}
+<form class="form-inline" action="/data.post" method="post">
+    <button type="submit" class="btn btn-primary btn-success" name="export_type" value="CSV"><i class="fa fa-download"></i> Export as CSV</button>
+    <button type="submit" class="btn btn-primary btn-success" name="export_type" value="JSON"><i class="fa fa-download"></i> Export as JSON</button>
+    <button type="submit" class="btn btn-primary btn-success" name="export_type" value="XML"><i class="fa fa-download"></i> Export as XML</button>
+</form>
 </body>

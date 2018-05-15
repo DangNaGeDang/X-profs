@@ -12,7 +12,7 @@
         <h2 class="text-center">Courses</h2>
         <form action="" method="get">
             {{#each courses}}
-                <button class="btn btn-default" type="submit" name="course_id" value={{this._id}}>{{this.name}}</button><br>
+                <button {{#compare ../courseId "==" this._id}} style="background-color: dodgerblue; color: white; cursor: pointer;" {{/compare}} type="submit" name="course_id" value={{this._id}}>{{this.name}}</button><br>
             {{/each}}
         </form>
     </div>
@@ -24,7 +24,7 @@
             <input type="hidden" name="course_id" value={{courseId}}>
             {{#each sessions}}
                 <!--<button class="session btn-block" type="submit" name="session_id" value={{this._id}}>{{this.date}}</button><br>-->
-                <button class="btn btn-default btn-block" type="submit" name="session_id" value={{this._id}}>{{this.date}}</button><br>
+                <button style="width:100%; {{#compare ../sessionId "==" this._id}}background-color: dodgerblue; color: white; cursor: pointer;{{/compare}}" type="submit" name="session_id" value={{this._id}}>{{this.date}}</button><br>
             {{/each}}
         </form>
     </div>
@@ -37,7 +37,7 @@
             <input type="hidden" name="course_id" value={{courseId}}>
             <input type="hidden" name="session_id" value={{sessionId}}>
             {{#each students}}
-                <button class="btn btn-default" type="submit" name="student_id" value={{this._id}}>{{this.firstname}} {{this.name}}</button><br>
+                <button {{#compare ../studentId "==" this._id}} style="background-color: dodgerblue; color: white; cursor: pointer;" {{/compare}} type="submit" name="student_id" value={{this._id}}>{{this.firstname}} {{this.name}}</button><br>
             {{/each}}
         </form>
     </div>

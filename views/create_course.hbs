@@ -1,0 +1,42 @@
+<h1>Add a course</h1>
+
+<input type="button" class="btn btn-default" value="CRUD" OnClick="window.location.href='/CRUD' "/>
+
+<form action="/create/course.post" method="post">
+    <div class="form-group">
+        <h3>Name:</h3>
+        <input type="text" class="form-control" name="name" placeholder="Enter name">
+    </div>
+
+    <br /><h3>Teacher :</h3>
+    <select name="teacher">
+        {{#each Teachers}}
+            <option value={{this.id}}>{{this.name}}</option>
+        {{/each}}
+    </select>
+    <br />
+    <a href='/create/user'>New teacher</a><br />
+
+    <br /><h3>Sessions :</h3>
+    {{#each Sessions}}
+        <input type="checkbox" name=sessions value={{this.id}} id={{this.id}} /> <label for={{this.id}}>{{this.date}}</label><br />
+    {{/each}}
+    <a href='/create/session'>New session</a><br />
+
+    <br /><h3>Students :</h3>
+    {{#each Students}}
+        <input type="checkbox" name=students value={{this.id}} id={{this.id}} /> <label for={{this.id}}>{{this.name}}</label><br />
+    {{/each}}
+    <a href='/create/user'>New student</a><br />
+
+    <br /><h3>Skills :</h3>
+    {{#each Skills}}
+        <input type="checkbox" name=skills value={{this.id}} id={{this.id}} /> <label for={{this.id}}>{{this.name}}</label><br />
+    {{/each}}
+    <a href='/create/skill'>New skill</a><br />
+    <br />
+
+    <button type="submit" class="btn btn-primary">Save</button>
+
+</form>
+
