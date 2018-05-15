@@ -36,11 +36,12 @@ app.engine('hbs', expresshbs({extname:'hbs',helpers:helpers,defaultLayout:'layou
 
 app.use(logger('dev'));
 
+var FileStore = require('session-file-store')(session);
 app.use(session({
-    secret: 'my little secret',
-    saveUninitialized: false,
-    resave: false
-}));
+    store: new FileStore({path:'/tmp/Sessions'}),
+    secret: "315817458371538", resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }}));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
