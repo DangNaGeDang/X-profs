@@ -19,7 +19,12 @@ router.post('/auth.post', function (req, res) {
         }
         if (user) {
             req.session.user = user;
-            res.redirect('/data');
+            if (req.session.user.roles[0] == 'admin') {
+                res.redirect('/CRUD');
+            } else {
+                res.redirect('/data');
+            }
+
         }
         else {
             res.render('auth', {msg: 'Incorrect login or password'});

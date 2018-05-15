@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 
 const schema = mongoose.Schema({
     date : {type : Date}
-})
+});
 
 const model = mongoose.model('session',schema);
-module.exports = model
+module.exports = model;

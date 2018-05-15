@@ -7,17 +7,17 @@ var logger = require('morgan');
 
 var helpers = require('handlebars-helpers')();
 var expresshbs = require('express-handlebars');
-var Handlebars = require('handlebars')
+var Handlebars = require('handlebars');
 
 var indexRouter = require('./routes/index');
 var authRouter = require('./routes/authRoutes');
 var evalRouter = require('./routes/evaluationRoutes');
 var dataRouter = require('./routes/dataRoutes');
 var chartRouter = require('./routes/chartRoutes');
-var createRouter = require('../XProfGroupe/routes/createRoutes');
-var removeRouter = require('../XProfGroupe/routes/removeRoutes');
-var editRouter = require('../XProfGroupe/routes/editRoutes');
-var CRUDRouter = require('../XProfGroupe/routes/CRUDRoutes');
+var createRouter = require('./routes/createRoutes');
+var removeRouter = require('./routes/removeRoutes');
+var editRouter = require('./routes/editRoutes');
+var CRUDRouter = require('./routes/CRUDRoutes');
 var mongoose = require('mongoose');
 
 var app = express();
@@ -50,6 +50,8 @@ mongoose.connect('mongodb://localhost/xprofs-groupe', function (err) {
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+
+//Use the express-handlebars-paginate module to complete paginate
 var paginateHelper = require('./express-handlebars-paginate/index.js');
 var hbs = require('hbs');
 //hbs.registerHelper('paginateHelper', paginateHelper.createPagination);
@@ -60,6 +62,7 @@ app.engine('hbs', expresshbs({extname: 'hbs', helpers: helpers, defaultLayout: '
 
 app.use(logger('dev'));
 
+//Use session-file-store module to achieve stable storage of session
 var FileStore = require('session-file-store')(session);
 app.use(session({
     store: new FileStore({path: '/tmp/Sessions'}),

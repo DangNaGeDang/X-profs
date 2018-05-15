@@ -10,8 +10,9 @@ const schema = mongoose.Schema({
     session: {type: ObjectId, ref: 'sessions'},
     student: {type: ObjectId, ref: 'users'},
     skill: {type: ObjectId, ref: 'skills'},
+    //Increase course field to facilitate display of course in the page of scores
     course: {type: ObjectId, ref: 'courses'},
-})
+});
 
 const model = mongoose.model('evaluation',schema);
-module.exports = model
+module.exports = model;

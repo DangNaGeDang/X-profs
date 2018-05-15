@@ -11,7 +11,7 @@ const schema = mongoose.Schema({
     sessions: [{type: ObjectId, ref: 'sessions'}],
     students: [{type: ObjectId, ref: 'users'}],
     skills: [{type: ObjectId, ref: 'skills'}]
-})
+});
 
 const model = mongoose.model('course',schema);
-module.exports = model
+module.exports = model;

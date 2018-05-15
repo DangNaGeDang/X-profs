@@ -38,3 +38,13 @@
 		"student"
 	]
 },
+{
+"_id" : ObjectId("5afab9d937dd3a2866146f19"),
+"roles" : [
+"admin"
+],
+"name" : "Templier",
+"firstname" : "Paul",
+"login" : "p.templier",
+"password" : "toto"
+},
