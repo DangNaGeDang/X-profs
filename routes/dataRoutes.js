@@ -212,6 +212,8 @@ router.post('/data.post', function (req, res) {
     if (!req.session.user) {
         res.redirect('auth');
     }
+
+    //Création du package de données
     var dataToExport = [];
     req.session.filteredEvaluations.forEach(function (eval) {
         var simplifiedEval = {};
@@ -235,6 +237,8 @@ router.post('/data.post', function (req, res) {
         }
         dataToExport.push(simplifiedEval);
     });
+
+    //Envoi des données en fonction du type de fichiers donnés
     switch (req.body.export_type) {
         case 'CSV':
             jsonexport(dataToExport, function (err, csv) {
