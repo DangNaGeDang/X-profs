@@ -1,3 +1,7 @@
+/**
+ * This page implements graph display, including filters functions.
+ */
+
 var express = require('express');
 var router = express.Router();
 
@@ -15,7 +19,7 @@ router.all('/*', function(req, res, next) {
     next();
 });
 
-
+/* Création d'une fonction qui retourne la moyenne du tableau passé en argument*/
 function moyenne(tableau)
 {
     var n = tableau.length;
@@ -27,15 +31,15 @@ function moyenne(tableau)
 
 router.get('/charts.html', function(req,res) {
 
-    if(!req.session.user){
+    if(!req.session.user){        // Pour s'assurer qu'un utilisateur s'est bien authentifié
         res.redirect('auth');
     }
 
-    if (req.query.chartFilter) {
+    if (req.query.chartFilter) {  // Choix du type de graphe par l'utilisateur
 
         req.session.chartFilter = req.query.chartFilter;
 
-        var filters = { };
+        var filters = { };        // Formation d'un filtre en fonction des souhaits de l'utilisateur avec les boutons à sa disposition
         if(req.query.studentFilter) { filters.student = req.query.studentFilter };
         if(req.session.user.roles[0]=="student") {filters.student = req.session.user._id};
         if(req.query.sessionFilter) { filters.session = req.query.sessionFilter };
@@ -44,7 +48,7 @@ router.get('/charts.html', function(req,res) {
 
 
 
-        Evaluation.find(filters)
+        Evaluation.find(filters)   // Recherche de toutes les évaluations qui correpondent au filtre établi par l'utilisateur
             .populate({
                 path: 'course',
                 model: Course
@@ -66,24 +70,25 @@ router.get('/charts.html', function(req,res) {
                 if(err) {throw err};
 
 
-                for (var k =0; k<evaluations.length; k++) {
-                    if (filters.skill) {var realSkill = evaluations[k].skill;};
-                    if (filters.course) {var realCourse = evaluations[k].course;};
-                    if (filters.student) {var realStudent = evaluations[k].student;};
-                    if (filters.session) {var realSession = evaluations[k].session;};
-                };
+                  // Récupération des données associées aux évaluations choisies
+                if (filters.skill) {var realSkill = evaluations[0].skill;};
+                if (filters.course) {var realCourse = evaluations[0].course;};
+                if (filters.student) {var realStudent = evaluations[0].student;};
+                if (filters.session) {var realSession = evaluations[0].session;};
 
 
+                  // Si le type de graphe choisi est radar
                 if (req.session.chartFilter == 'radar') {
 
-
+                    // Récuperation des noms des compétences
                     var skillNames = [];
                     for (var k =0; k < req.session.allSkills.length; k++) {
                         skillNames.push(req.session.allSkills[k].name.replace(/\s/g,"_"));
 
                     };
 
-                    var realCourse ;
+
+                    // Création de la liste des moyennes à afficher par compétence
                     var moy = [];
                     for (var k =0; k < req.session.allSkills.length; k++) {
 
@@ -91,6 +96,7 @@ router.get('/charts.html', function(req,res) {
                         for (var e = 0; e < evaluations.length; e++) {
 
                             realCourse = evaluations[e].course;
+                            // Répartition des notes par compétence
                             if (evaluations[e].skill.name == req.session.allSkills[k].name && evaluations[e].mark != -1) {
                                 evals.push(evaluations[e].mark);
                             };
@@ -101,6 +107,8 @@ router.get('/charts.html', function(req,res) {
 
 
                     res.render('charts', {
+
+                        // On rend les éléments nécessaires à l'affichage du menu
                         roles:req.session.user.roles,
                         firstname: req.session.user.firstname,
                         name: req.session.user.name,
@@ -108,6 +116,8 @@ router.get('/charts.html', function(req,res) {
                         skills:req.session.allSkills,
                         sessions:req.session.allSessions,
                         students:req.session.allStudents,
+
+                        // Elements propres à l'affichage des graphes
                         chartFilter : req.session.chartFilter,
                         notes : moy,
                         skillNames : skillNames,
@@ -117,21 +127,24 @@ router.get('/charts.html', function(req,res) {
                     });
                 }
 
+                // Si le type de graphe choisi est moyenne
                 else if (req.session.chartFilter == 'moyenne'){
 
-
+                    // Récuperation des noms des élèves
                     var studentNames = [];
                     for (var k =0; k < req.session.allStudents.length; k++) {
                         studentNames.push(req.session.allStudents[k].name.replace(/\s/g,"_"));
 
                     };
 
+                    // Création de la liste des moyennes à afficher par élève
                     var moy = [];
                     for (var k =0; k < req.session.allStudents.length; k++) {
 
                         var evals = [];
                         for (var e = 0; e < evaluations.length; e++) {
 
+                            // Répartition des notes par élèves
                             if (evaluations[e].student._id == req.session.allStudents[k]._id && evaluations[e].mark != -1) {
                                 evals.push(evaluations[e].mark);
                             };

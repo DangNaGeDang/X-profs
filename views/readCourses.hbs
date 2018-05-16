@@ -1,3 +1,4 @@
+<!--LIST OF COURSES-->
 <h2>Courses List</h2>
 
 <input type="button" class="btn btn-secondary" value="Add course" OnClick="window.location.href='/create/course' "/>
@@ -31,6 +32,7 @@
                     {{this.name}}<br/>
                 {{/each}}
             </td>
+            <!--Edition and deletion buttons-->
             <td><a href="/edit/course/{{this._id}}">Edit</a></td>
             <td><a href="/remove/course/{{this._id}}">Remove</a></td>
         </tr>

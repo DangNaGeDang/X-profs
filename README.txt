@@ -1,7 +1,11 @@
 ﻿Projet de AWNG en groupe
 Adrien Gimonnet, Arthur Braida, Paul Templier, Yiming Han
 
-Basé sur le projet individuel de Adrien Gimonnet
+Base de données dans /databaseFile
+
+url d'accueil:localhost:3000  ou  localhost:3000/auth
+
+Basé sur le projet individuel de Adrien Gimonnet.
 
 Yiming 's log:
 1.Pour éviter la duplication, j'ai placé les mêmes styles écrits dans le fichier style.css  sous / public / stylesheets.

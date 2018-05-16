@@ -1,7 +1,10 @@
+<!--USER CREATION-->
 <h2>Add a user</h2>
 
+<!--go back to CRUD menu-->
 <input type="button" class="btn btn-default" value="CRUD" OnClick="window.location.href='/CRUD' "/>
 
+<!--roles choice : checkbox-->
 <form action="/create/user.post" method="post">
     <div class="form-group">
         <label>Role:</label><br/>
@@ -11,8 +14,9 @@
             for=2>Student</label><br/>
         <input type="checkbox" name='role' value='admin' id=3/> <label
             for=3>Admin</label><br/>
-
     </div>
+
+    <!--General information fields-->
 
     <div class="form-group">
         <label>Name:</label>
@@ -29,6 +33,7 @@
         <input type="text" class="form-control" name="login" placeholder="Enter login">
     </div>
 
+    <!--Password fields-->
     <div class="form-group">
         <label>Password:</label>
         <input type="password" class="form-control" name="password" placeholder="Enter password">

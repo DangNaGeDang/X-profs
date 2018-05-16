@@ -1,5 +1,6 @@
 /**
  * Created by y.Han on 5/3/18.
+ * This page implements score display, including filters, sorting and export functions.
  */
 var express = require('express');
 var session = require('express-session');
@@ -13,7 +14,7 @@ var Session = require('../models/sessionsModel');
 var Skill = require('../models/skillModel');
 var Evaluation = require('../models/evalModel');
 
-
+//Scores display
 router.get('/data', async function (req, res) {
     if (!req.session.user) {
         res.redirect('auth');
@@ -52,6 +53,7 @@ router.get('/data', async function (req, res) {
         req.session.markOrder = null;
     }
     //Store filter conditions and sorting requirements in session
+    //Parameter-passing from sessions to filters must happen after parameter-passing from request to sessions
     if (req.query.studentFilter) {
         var student = await User.findOne({'_id': req.query.studentFilter}).exec();
         req.session.studentFilterObject = student;

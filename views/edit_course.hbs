@@ -1,5 +1,7 @@
+<!--COURSE EDITION-->
 <h2>Edit a course</h2>
 
+<!--go back to CRUD menu-->
 <input type="button" class="btn btn-default" value="CRUD" OnClick="window.location.href='/CRUD' "/>
 
 <form action="/edit/course.post/{{course.id}}" method="post">
@@ -12,9 +14,9 @@
     <br/>
     <h3>Teacher :</h3>
     <select name="teacher">
-        {{#each Teachers}}
+        {{#each Teachers}} <!--list of all teachers-->
             {{#egal this.id ../course.teacher}}
-                <option value={{this._id}} selected='selected'>{{this.name}}</option>
+                <option value={{this._id}} selected='selected'>{{this.name}}</option>  <!--select the current teacher-->
             {{else}}
                 <option value={{this.id}}>{{this.name}}</option>
             {{/egal}}
@@ -25,8 +27,8 @@
 
     <br/>
     <h3>Sessions :</h3>
-    {{#each Sessions}}
-        {{#idInArray ../course.sessions this._id }}
+    {{#each Sessions}} <!--list of all sessions-->
+        {{#idInArray ../course.sessions this._id }}<!-- check the selected sessions-->
             <input type="checkbox" name=sessions value={{this.id}} id={{this.id}} checked/> <label
                 for={{this.id}}>{{this.date}}</label><br/>
         {{else}}
@@ -39,8 +41,8 @@
 
     <br/>
     <h3>Students :</h3>
-    {{#each Students}}
-        {{#idInArray  ../course.students this._id}}
+    {{#each Students}}  <!--list of all students-->
+        {{#idInArray  ../course.students this._id}}<!-- check the selected students-->
             <input type="checkbox" name=students value={{this.id}} id={{this.id}} checked/> <label
                 for={{this.id}}>{{this.name}}</label><br/>
         {{else}}
@@ -53,8 +55,8 @@
 
     <br/>
     <h3>Skills :</h3>
-    {{#each Skills}}
-        {{#idInArray  ../course.skills this.id}}
+    {{#each Skills}} <!--list of all skills-->
+        {{#idInArray  ../course.skills this.id}} <!-- check the selected skills-->
             <input type="checkbox" name=skills value={{this.id}} id={{this.id}} checked/> <label
                 for={{this.id}}>{{this.name}}</label><br/>
         {{else}}

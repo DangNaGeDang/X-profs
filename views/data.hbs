@@ -1,9 +1,11 @@
+<!--This page implements score display, including filters, sorting and export functions.-->
 <head>
     <meta charset="UTF-8">
     <title>Scores</title>
 </head>
 <body>
 <h2>Scores List</h2>
+<!--Filters and sorts setting-->
 <form class="form-inline" action="/data" method="get">
     {{#idInArray roles "teacher"}}
         <div class="form-group">
@@ -80,7 +82,7 @@
             <a href="#" class="btn btn-primary  disabled" role="button">{{courseFilterObject.name}}</a>  {{/if}}
     </tr>
 </table>
-
+<!--Scores display-->
 {{#idInArray roles "teacher"}}
     <table class="table">
         <tr>
@@ -127,6 +129,7 @@
     </table>
 {{/idInArray}}
 {{{paginateHelper pagination limit="10"}}}
+<!--Export buttons-->
 <form class="form-inline" action="/data.post" method="post">
     <button type="submit" class="btn btn-primary btn-success" name="export_type" value="CSV"><i
             class="fa fa-download"></i> Export as CSV

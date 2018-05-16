@@ -54,7 +54,6 @@ app.set('view engine', 'hbs');
 //Use the express-handlebars-paginate module to complete paginate
 var paginateHelper = require('./express-handlebars-paginate/index.js');
 var hbs = require('hbs');
-//hbs.registerHelper('paginateHelper', paginateHelper.createPagination);
 var helpers = require('handlebars-helpers')();
 helpers.paginateHelper = paginateHelper.createPagination;
 app.engine('hbs', expresshbs({extname: 'hbs', helpers: helpers, defaultLayout: 'layout.hbs'}));

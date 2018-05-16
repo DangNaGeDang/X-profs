@@ -1,3 +1,4 @@
+<!--LIST OF USERS-->
 <h2>Users List</h2>
 
 <input type="button" class="btn btn-secondary" value="Add user" OnClick="window.location.href='/create/user' "/>
@@ -18,6 +19,7 @@
             <td>{{this.name}}</td>
             <td>{{this.firstname}}</td>
             <td>{{this.login}}</td>
+            <!--Edition and deletion buttons-->
             <td><a href="/edit/user/{{this._id}}">Edit</a></td>
             <td><a href="/remove/user/{{this._id}}">Remove</a></td>
         </tr>

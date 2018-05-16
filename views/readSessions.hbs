@@ -1,3 +1,4 @@
+<!--LIST OF SESSIONS-->
 <h2>Sessions List</h2>
 
 <input type="button" class="btn btn-secondary" value="Add session" OnClick="window.location.href='/create/session' "/>
@@ -12,6 +13,7 @@
     {{#each List}}
         <tr>
             <td>{{this.date}}</td>
+            <!--Edition and deletion buttons-->
             <td><a href="/edit/session/{{this._id}}">Edit</a></td>
             <td><a href="/remove/session/{{this._id}}">Remove</a></td>
         </tr>

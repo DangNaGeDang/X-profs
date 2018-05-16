@@ -1,12 +1,14 @@
+<!--USER EDITION-->
 <h2>Edit user</h2>
 
+<!--go back to CRUD menu-->
 <input type="button" class="btn btn-default" value="CRUD" OnClick="window.location.href='/CRUD' "/>
 
 <form action="/edit/user.post/{{user.id}}" method="post">
     <div class="form-group">
         <label>Role:</label><br/>
 
-        {{#idInArray user.roles 'teacher' }}
+        {{#idInArray user.roles 'teacher' }} <!--check box if currently teacher-->
             <input type="checkbox" name='role' value='teacher' id=1 checked/> <label
                 for=1>Teacher</label><br/>
         {{else}}
@@ -14,7 +16,7 @@
                 for=1>Teacher</label><br/>
         {{/idInArray}}
 
-        {{#idInArray user.roles 'student' }}
+        {{#idInArray user.roles 'student' }}<!--check box if currently student-->
             <input type="checkbox" name='role' value='student' id=2 checked/> <label
                 for=2>Student</label><br/>
         {{else}}
@@ -22,7 +24,7 @@
                 for=2>Student</label><br/>
         {{/idInArray}}
 
-        {{#idInArray user.roles 'admin' }}
+        {{#idInArray user.roles 'admin' }}<!--check box if currently admin-->
             <input type="checkbox" name='role' value='admin' id=3 checked/> <label
                 for=3>Admin</label><br/>
         {{else}}
@@ -48,6 +50,7 @@
         <input type="text" class="form-control" name="login" placeholder="Enter login" value={{user.login}}>
     </div>
 
+    <!--Password modification fields-->
     <h3>Password modification</h3>
     <p style="color:red;">{{Message}}</p>
     <div class="form-group">

@@ -1,5 +1,8 @@
+<!--COURSE CREATION-->
+
 <h2>Add a course</h2>
 
+<!--go back to CRUD menu-->
 <input type="button" class="btn btn-default" value="CRUD" OnClick="window.location.href='/CRUD' "/>
 
 <form action="/create/course.post" method="post">
@@ -8,6 +11,7 @@
         <input type="text" class="form-control" name="name" placeholder="Enter name">
     </div>
 
+    <!--teacher choice-->
     <br/>
     <h3>Teacher :</h3>
     <select name="teacher">
@@ -18,6 +22,7 @@
     <br/>
     <a href='/create/user'>New teacher</a><br/>
 
+    <!--sessions choice : checkbox-->
     <br/>
     <h3>Sessions :</h3>
     {{#each Sessions}}
@@ -26,6 +31,7 @@
     {{/each}}
     <a href='/create/session'>New session</a><br/>
 
+    <!--students choice : checkbox-->
     <br/>
     <h3>Students :</h3>
     {{#each Students}}
@@ -34,6 +40,7 @@
     {{/each}}
     <a href='/create/user'>New student</a><br/>
 
+    <!--skills choice : checkbox-->
     <br/>
     <h3>Skills :</h3>
     {{#each Skills}}
